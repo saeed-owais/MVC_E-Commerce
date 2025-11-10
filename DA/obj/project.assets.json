@@ -4950,23 +4950,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\saide\\.nuget\\packages\\": {},
+    "C:\\Users\\Mostafa1\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\saide\\source\\repos\\E-Commerce_MVC\\DA\\DAL.csproj",
+      "projectUniqueName": "C:\\Users\\Mostafa1\\source\\repos\\MVC_E-Commerce\\DA\\DAL.csproj",
       "projectName": "DAL",
-      "projectPath": "C:\\Users\\saide\\source\\repos\\E-Commerce_MVC\\DA\\DAL.csproj",
-      "packagesPath": "C:\\Users\\saide\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\saide\\source\\repos\\E-Commerce_MVC\\DA\\obj\\",
+      "projectPath": "C:\\Users\\Mostafa1\\source\\repos\\MVC_E-Commerce\\DA\\DAL.csproj",
+      "packagesPath": "C:\\Users\\Mostafa1\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Mostafa1\\source\\repos\\MVC_E-Commerce\\DA\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\saide\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mostafa1\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4975,7 +4975,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

@@ -4,7 +4,8 @@ using DAL.Interfaces;
 using DAL.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+using AutoMapper;
+using BLL.Mapper;
 namespace E_Commerce_MVC
 {
     public class Program
@@ -28,6 +29,7 @@ namespace E_Commerce_MVC
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+
             builder.Services.AddHttpContextAccessor();
 
 
@@ -37,6 +39,14 @@ namespace E_Commerce_MVC
             // 6. ????? ????? MVC
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddAutoMapper(typeof(ReviewProfile).Assembly);
+            builder.Services.AddAutoMapper(typeof(ProductProfile).Assembly);
+            builder.Services.AddAutoMapper(typeof(PaymentProfile).Assembly);
+            builder.Services.AddAutoMapper(typeof(OrderProfile).Assembly);
+            builder.Services.AddAutoMapper(typeof(ApplicationUserProfile).Assembly);
+            builder.Services.AddAutoMapper(typeof(OrderItemProfile).Assembly);
+            builder.Services.AddAutoMapper(typeof(CategoryProfile).Assembly);
+            builder.Services.AddAutoMapper(typeof(CartItemProfile).Assembly);
 
             var app = builder.Build();
 

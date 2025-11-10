@@ -2,6 +2,35 @@
   "version": 3,
   "targets": {
     "net9.0": {
+      "AutoMapper/12.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/12.0.1": {
+        "type": "package",
+        "dependencies": {
+          "AutoMapper": "[12.0.1]",
+          "Microsoft.Extensions.Options": "6.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        }
+      },
       "Azure.Core/1.38.0": {
         "type": "package",
         "dependencies": {
@@ -486,7 +515,7 @@
           }
         }
       },
-      "Microsoft.CSharp/4.5.0": {
+      "Microsoft.CSharp/4.7.0": {
         "type": "package",
         "compile": {
           "ref/netcoreapp2.0/_._": {}
@@ -1709,6 +1738,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "AutoMapper": "12.0.1",
           "DAL": "1.0.0"
         },
         "compile": {
@@ -1737,6 +1767,35 @@
     }
   },
   "libraries": {
+    "AutoMapper/12.0.1": {
+      "sha512": "hvV62vl6Hp/WfQ24yzo3Co9+OPl8wH8hApwVtgWpiAynVJkUcs7xvehnSftawL8Pe8FrPffBRM3hwzLQqWDNjA==",
+      "type": "package",
+      "path": "automapper/12.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.12.0.1.nupkg.sha512",
+        "automapper.nuspec",
+        "icon.png",
+        "lib/netstandard2.1/AutoMapper.dll",
+        "lib/netstandard2.1/AutoMapper.xml"
+      ]
+    },
+    "AutoMapper.Extensions.Microsoft.DependencyInjection/12.0.1": {
+      "sha512": "+g/K+Vpe3gGMKGzjslMOdqNlkikScDjWfVvmWTayrDHaG/n2pPmFBMa+jKX1r/h6BDGFdkyRjAuhFE3ykW+r1g==",
+      "type": "package",
+      "path": "automapper.extensions.microsoft.dependencyinjection/12.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
+        "automapper.extensions.microsoft.dependencyinjection.nuspec",
+        "icon.png",
+        "lib/netstandard2.1/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
+      ]
+    },
     "Azure.Core/1.38.0": {
       "sha512": "IuEgCoVA0ef7E4pQtpC3+TkPbzaoQfa77HlfJDmfuaJUCVJmn7fT0izamZiryW5sYUFKizsftIxMkXKbgIcPMQ==",
       "type": "package",
@@ -2854,10 +2913,10 @@
         "microsoft.codeanalysis.workspaces.msbuild.nuspec"
       ]
     },
-    "Microsoft.CSharp/4.5.0": {
-      "sha512": "kaj6Wb4qoMuH3HySFJhxwQfe8R/sJsNJnANrvv8WdFPMoNbKY5htfNscv+LHCu5ipz+49m2e+WQXpLXr9XYemQ==",
+    "Microsoft.CSharp/4.7.0": {
+      "sha512": "pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
       "type": "package",
-      "path": "microsoft.csharp/4.5.0",
+      "path": "microsoft.csharp/4.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2870,6 +2929,7 @@
         "lib/netcoreapp2.0/_._",
         "lib/netstandard1.3/Microsoft.CSharp.dll",
         "lib/netstandard2.0/Microsoft.CSharp.dll",
+        "lib/netstandard2.0/Microsoft.CSharp.xml",
         "lib/portable-net45+win8+wp8+wpa81/_._",
         "lib/uap10.0.16299/_._",
         "lib/win8/_._",
@@ -2879,7 +2939,7 @@
         "lib/xamarinmac20/_._",
         "lib/xamarintvos10/_._",
         "lib/xamarinwatchos10/_._",
-        "microsoft.csharp.4.5.0.nupkg.sha512",
+        "microsoft.csharp.4.7.0.nupkg.sha512",
         "microsoft.csharp.nuspec",
         "ref/MonoAndroid10/_._",
         "ref/MonoTouch10/_._",
@@ -4950,28 +5010,29 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
       "BLL >= 1.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.10"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\saide\\.nuget\\packages\\": {},
+    "C:\\Users\\Mostafa1\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\saide\\source\\repos\\E-Commerce_MVC\\E-Commerce_MVC\\E-Commerce_MVC.csproj",
+      "projectUniqueName": "C:\\Users\\Mostafa1\\source\\repos\\MVC_E-Commerce\\E-Commerce_MVC\\E-Commerce_MVC.csproj",
       "projectName": "E-Commerce_MVC",
-      "projectPath": "C:\\Users\\saide\\source\\repos\\E-Commerce_MVC\\E-Commerce_MVC\\E-Commerce_MVC.csproj",
-      "packagesPath": "C:\\Users\\saide\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\saide\\source\\repos\\E-Commerce_MVC\\E-Commerce_MVC\\obj\\",
+      "projectPath": "C:\\Users\\Mostafa1\\source\\repos\\MVC_E-Commerce\\E-Commerce_MVC\\E-Commerce_MVC.csproj",
+      "packagesPath": "C:\\Users\\Mostafa1\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Mostafa1\\source\\repos\\MVC_E-Commerce\\E-Commerce_MVC\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\saide\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Mostafa1\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4980,15 +5041,14 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\saide\\source\\repos\\E-Commerce_MVC\\BL\\BLL.csproj": {
-              "projectPath": "C:\\Users\\saide\\source\\repos\\E-Commerce_MVC\\BL\\BLL.csproj"
+            "C:\\Users\\Mostafa1\\source\\repos\\MVC_E-Commerce\\BL\\BLL.csproj": {
+              "projectPath": "C:\\Users\\Mostafa1\\source\\repos\\MVC_E-Commerce\\BL\\BLL.csproj"
             }
           }
         }
@@ -5009,6 +5069,10 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+            "target": "Package",
+            "version": "[12.0.1, )"
+          },
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
