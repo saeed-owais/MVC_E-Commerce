@@ -5022,11 +5022,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\saide\\Desktop\\mvc_project\\E-Commerce_MVC\\E-Commerce_MVC.csproj",
+      "projectUniqueName": "C:\\Users\\saide\\source\\repos\\MVC_E-Commerce\\E-Commerce_MVC\\E-Commerce_MVC.csproj",
       "projectName": "E-Commerce_MVC",
-      "projectPath": "C:\\Users\\saide\\Desktop\\mvc_project\\E-Commerce_MVC\\E-Commerce_MVC.csproj",
+      "projectPath": "C:\\Users\\saide\\source\\repos\\MVC_E-Commerce\\E-Commerce_MVC\\E-Commerce_MVC.csproj",
       "packagesPath": "C:\\Users\\saide\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\saide\\Desktop\\mvc_project\\E-Commerce_MVC\\obj\\",
+      "outputPath": "C:\\Users\\saide\\source\\repos\\MVC_E-Commerce\\E-Commerce_MVC\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -5048,8 +5048,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\saide\\Desktop\\mvc_project\\BL\\BLL.csproj": {
-              "projectPath": "C:\\Users\\saide\\Desktop\\mvc_project\\BL\\BLL.csproj"
+            "C:\\Users\\saide\\source\\repos\\MVC_E-Commerce\\BL\\BLL.csproj": {
+              "projectPath": "C:\\Users\\saide\\source\\repos\\MVC_E-Commerce\\BL\\BLL.csproj"
             }
           }
         }

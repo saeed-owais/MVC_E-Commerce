@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fN0JAfkZSEc=",
+  "dgSpecHash": "xpI65cQsVSs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\saide\\Desktop\\mvc_project\\E-Commerce_MVC\\E-Commerce_MVC.csproj",
+  "projectFilePath": "C:\\Users\\saide\\source\\repos\\MVC_E-Commerce\\E-Commerce_MVC\\E-Commerce_MVC.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\saide\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\saide\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

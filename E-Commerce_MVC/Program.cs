@@ -1,16 +1,19 @@
+using BLL.Mapper;
+using BLL.Services;
+using BLL.Services.AdminCategory;
+using BLL.Services.AdminProduct;
 using DA;
 using DA.Models;
+using DAL.Data;
 using DAL.Interfaces;
 using DAL.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using AutoMapper;
-using BLL.Mapper;
 namespace E_Commerce_MVC
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -32,12 +35,14 @@ namespace E_Commerce_MVC
 
             builder.Services.AddHttpContextAccessor();
 
+            builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            // 6. ????? ????? MVC
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<IAdminProductService, AdminProductService>();
+            builder.Services.AddScoped<IAdminCategoryService, AdminCategoryService>();
+
 
             builder.Services.AddAutoMapper(typeof(ReviewProfile).Assembly);
             builder.Services.AddAutoMapper(typeof(ProductProfile).Assembly);
@@ -50,6 +55,19 @@ namespace E_Commerce_MVC
 
             var app = builder.Build();
 
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    await AppDbInitializer.SeedRolesAndAdminAsync(services);
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred during database seeding.");
+                }
+            }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -58,7 +76,10 @@ namespace E_Commerce_MVC
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.MapControllerRoute(
+                name: "Admin",
+                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+            );
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");

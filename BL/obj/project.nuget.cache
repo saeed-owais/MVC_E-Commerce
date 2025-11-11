@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SNMtbftuzl0=",
+  "dgSpecHash": "vr6p5NNioTE=",
   "success": true,
-  "projectFilePath": "C:\\Users\\saide\\Desktop\\mvc_project\\BL\\BLL.csproj",
+  "projectFilePath": "C:\\Users\\saide\\source\\repos\\MVC_E-Commerce\\BL\\BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\saide\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\saide\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
