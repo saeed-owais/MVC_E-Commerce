@@ -13,6 +13,6 @@ namespace DAL.Interfaces
         IRepository<Payment> Payments { get; }
         IRepository<Review> Reviews { get; }
 
-        Task<int> CompleteAsync();
+        Task<int> CompleteAsync(CancellationToken cancellationToken = default);
     }
 }

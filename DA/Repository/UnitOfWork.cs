@@ -30,9 +30,9 @@ namespace DAL.Repository
             Reviews = new Repository<Review>(_context);
         }
 
-        public async Task<int> CompleteAsync()
+        public async Task<int> CompleteAsync(CancellationToken cancellationToken = default)
         {
-            return await _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync(cancellationToken);
         }
 
         public void Dispose()
