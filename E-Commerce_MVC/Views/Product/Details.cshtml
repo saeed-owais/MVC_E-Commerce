@@ -1,0 +1,24 @@
+﻿@model E_Commerce_MVC.Models.Product.ProductDetailsViewModel
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <img src="@Model.Product.ImageUrl" alt="@Model.Product.Name" class="img-fluid rounded" />
+    </div>
+
+    <div class="col-md-6">
+        <h2>@Model.Product.Name</h2>
+        <p class="lead text-success">@Model.Product.Price.ToString("C")</p>
+        <p>@Model.Product.Description</p>
+        <p><strong>Category:</strong> @Model.Product.CategoryName</p>
+
+        <form asp-controller="Cart" asp-action="AddToCart" method="post">
+            <input type="hidden" name="productId" value="@Model.Product.Id" />
+            <div class="input-group w-50 mb-3">
+                <input type="number" name="qty" value="@Model.Quantity" min="1" class="form-control" />
+                <button type="submit" class="btn btn-success">Add to Cart</button>
+            </div>
+        </form>
+
+        <a asp-action="Index" class="btn btn-outline-secondary">Back to Products</a>
+    </div>
+</div>

@@ -42,7 +42,7 @@ namespace BLL.Services.AdminProduct
                 throw new InvalidOperationException($"Category with ID {productDto.CategoryId} does not exist.");
             }
 
-            var product = _mapper.Map<Product>(productDto);
+            var product = _mapper.Map<DA.Models.Product>(productDto);
 
             await _unitOfWork.Products.AddAsync(product, cancellationToken);
             await _unitOfWork.CompleteAsync();

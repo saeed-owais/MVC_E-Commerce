@@ -2,6 +2,9 @@ using BLL.Mapper;
 using BLL.Services;
 using BLL.Services.AdminCategory;
 using BLL.Services.AdminProduct;
+using BLL.Services.Cart;
+using BLL.Services.Category;
+using BLL.Services.Product;
 using DA;
 using DA.Models;
 using DAL.Data;
@@ -42,7 +45,9 @@ namespace E_Commerce_MVC
 
             builder.Services.AddScoped<IAdminProductService, AdminProductService>();
             builder.Services.AddScoped<IAdminCategoryService, AdminCategoryService>();
-
+            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<ICartService, CartService>();
 
             builder.Services.AddAutoMapper(typeof(ReviewProfile).Assembly);
             builder.Services.AddAutoMapper(typeof(ProductProfile).Assembly);

@@ -14,6 +14,9 @@ namespace BLL.Mapper
 
             CreateMap<ProductAdminDto, Product>()
                 .ForMember(dest => dest.Category, opt => opt.Ignore()); // نتجاهل الـ Category Object
+
+            CreateMap<DA.Models.Product, DTOs.Product.ProductDTO>()
+                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category != null ? src.Category.Name : string.Empty));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BLL.DTOs.Admin;
+using BLL.DTOs.Category;
 using DA.Models;
 
 namespace BLL.Mapper
@@ -9,6 +10,7 @@ namespace BLL.Mapper
         public CategoryProfile()
         {
             CreateMap<Category, CategoryDto>();
+            CreateMap<Category, CategoryDTO>();
         }
     }
 }

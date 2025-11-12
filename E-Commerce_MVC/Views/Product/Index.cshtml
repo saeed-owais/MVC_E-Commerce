@@ -1,0 +1,40 @@
+﻿@model E_Commerce_MVC.Models.Product.ProductListViewModel
+<h2>Products</h2>
+
+<form method="get" class="mb-3">
+    <select name="categoryId" onchange="this.form.submit()" class="form-select w-auto d-inline-block">
+        <option value="">All Categories</option>
+        @foreach (var c in Model.Categories)
+        {
+            var isSelected = Model.SelectedCategoryId == c.Id ? "selected" : "";
+            @Html.Raw($"<option value='{c.Id}' {isSelected}>{c.Name}</option>")
+        }
+    </select>
+</form>
+
+
+<div class="row">
+    @foreach (var p in Model.Products)
+    {
+        <div class="col-md-3 mb-4">
+            <div class="card h-100">
+                <img src="@p.ImageUrl" class="card-img-top" alt="@p.Name" />
+                <div class="card-body">
+                    <h5>@p.Name</h5>
+                    <p>@p.Price.ToString("C")</p>
+                    <a asp-action="Details" asp-route-id="@p.Id" class="btn btn-primary btn-sm">View Details</a>
+                    <form asp-controller="Cart"
+                          asp-action="AddToCart"
+                          method="post"
+                          class="d-inline">
+                        <input type="hidden" name="productId" value="@p.Id" />
+                        <input type="hidden" name="qty" value="1" />
+                        <button type="submit" class="btn btn-success btn-sm">
+                            <i class="bi bi-cart-plus"></i> Add to Cart
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>
