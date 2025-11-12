@@ -6,7 +6,7 @@ namespace DAL.Models
     public class BaseModel : IAuditable, ISoftDelete
     {
         [Key]
-        public string Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         // IAuditable Implementation
         public DateTime CreatedOnUtc { get; set; } = DateTime.UtcNow;

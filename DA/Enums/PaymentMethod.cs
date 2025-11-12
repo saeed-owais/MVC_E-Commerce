@@ -5,6 +5,7 @@
         Stripe,
         PayPal,
         Fawry,
+        Paymob,
         CashOnDelivery
     }
 }

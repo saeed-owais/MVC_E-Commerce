@@ -1,7 +1,12 @@
 using BLL.Mapper;
 using BLL.Services;
+using BLL.Services.Address;
 using BLL.Services.AdminCategory;
 using BLL.Services.AdminProduct;
+using BLL.Services.Cartitem;
+using BLL.Services.Order;
+using BLL.Services.OrderItem;
+using BLL.Services.Payment;
 using DA;
 using DA.Models;
 using DAL.Data;
@@ -42,7 +47,12 @@ namespace E_Commerce_MVC
 
             builder.Services.AddScoped<IAdminProductService, AdminProductService>();
             builder.Services.AddScoped<IAdminCategoryService, AdminCategoryService>();
-
+            builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IMockPaymentService, MockPaymentService>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IOrderItemService, OrderItemService>();
+            builder.Services.AddScoped<IAddressService, AddressService>();
+            builder.Services.AddScoped<ICartItemService, CartItemService>();
 
             builder.Services.AddAutoMapper(typeof(ReviewProfile).Assembly);
             builder.Services.AddAutoMapper(typeof(ProductProfile).Assembly);
@@ -52,6 +62,8 @@ namespace E_Commerce_MVC
             builder.Services.AddAutoMapper(typeof(OrderItemProfile).Assembly);
             builder.Services.AddAutoMapper(typeof(CategoryProfile).Assembly);
             builder.Services.AddAutoMapper(typeof(CartItemProfile).Assembly);
+
+            builder.Services.AddHttpClient();
 
             var app = builder.Build();
 

@@ -73,3 +73,18 @@ D:\ITI\MVC Project\Project\DA\obj\Debug\net9.0\refint\DAL.dll
 D:\ITI\MVC Project\Project\DA\obj\Debug\net9.0\DAL.pdb
 D:\ITI\MVC Project\Project\DA\obj\Debug\net9.0\DAL.genruntimeconfig.cache
 D:\ITI\MVC Project\Project\DA\obj\Debug\net9.0\ref\DAL.dll
+C:\Users\Mostafa1\Desktop\mvc\DA\bin\Debug\net9.0\DAL.deps.json
+C:\Users\Mostafa1\Desktop\mvc\DA\bin\Debug\net9.0\DAL.runtimeconfig.json
+C:\Users\Mostafa1\Desktop\mvc\DA\bin\Debug\net9.0\DAL.dll
+C:\Users\Mostafa1\Desktop\mvc\DA\bin\Debug\net9.0\DAL.pdb
+C:\Users\Mostafa1\Desktop\mvc\DA\obj\Debug\net9.0\DAL.csproj.AssemblyReference.cache
+C:\Users\Mostafa1\Desktop\mvc\DA\obj\Debug\net9.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mostafa1\Desktop\mvc\DA\obj\Debug\net9.0\DAL.AssemblyInfoInputs.cache
+C:\Users\Mostafa1\Desktop\mvc\DA\obj\Debug\net9.0\DAL.AssemblyInfo.cs
+C:\Users\Mostafa1\Desktop\mvc\DA\obj\Debug\net9.0\DAL.csproj.CoreCompileInputs.cache
+C:\Users\Mostafa1\Desktop\mvc\DA\obj\Debug\net9.0\DAL.sourcelink.json
+C:\Users\Mostafa1\Desktop\mvc\DA\obj\Debug\net9.0\DAL.dll
+C:\Users\Mostafa1\Desktop\mvc\DA\obj\Debug\net9.0\refint\DAL.dll
+C:\Users\Mostafa1\Desktop\mvc\DA\obj\Debug\net9.0\DAL.pdb
+C:\Users\Mostafa1\Desktop\mvc\DA\obj\Debug\net9.0\DAL.genruntimeconfig.cache
+C:\Users\Mostafa1\Desktop\mvc\DA\obj\Debug\net9.0\ref\DAL.dll
