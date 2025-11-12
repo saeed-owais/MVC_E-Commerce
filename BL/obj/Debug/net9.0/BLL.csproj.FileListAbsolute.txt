@@ -46,3 +46,19 @@ C:\Users\saide\source\repos\MVC_E-Commerce\BL\obj\Debug\net9.0\BLL.dll
 C:\Users\saide\source\repos\MVC_E-Commerce\BL\obj\Debug\net9.0\refint\BLL.dll
 C:\Users\saide\source\repos\MVC_E-Commerce\BL\obj\Debug\net9.0\BLL.pdb
 C:\Users\saide\source\repos\MVC_E-Commerce\BL\obj\Debug\net9.0\ref\BLL.dll
+D:\ITI\MVC Project\Project\BL\bin\Debug\net9.0\BLL.deps.json
+D:\ITI\MVC Project\Project\BL\bin\Debug\net9.0\BLL.dll
+D:\ITI\MVC Project\Project\BL\bin\Debug\net9.0\BLL.pdb
+D:\ITI\MVC Project\Project\BL\bin\Debug\net9.0\DAL.dll
+D:\ITI\MVC Project\Project\BL\bin\Debug\net9.0\DAL.pdb
+D:\ITI\MVC Project\Project\BL\obj\Debug\net9.0\BLL.csproj.AssemblyReference.cache
+D:\ITI\MVC Project\Project\BL\obj\Debug\net9.0\BLL.GeneratedMSBuildEditorConfig.editorconfig
+D:\ITI\MVC Project\Project\BL\obj\Debug\net9.0\BLL.AssemblyInfoInputs.cache
+D:\ITI\MVC Project\Project\BL\obj\Debug\net9.0\BLL.AssemblyInfo.cs
+D:\ITI\MVC Project\Project\BL\obj\Debug\net9.0\BLL.csproj.CoreCompileInputs.cache
+D:\ITI\MVC Project\Project\BL\obj\Debug\net9.0\BLL.sourcelink.json
+D:\ITI\MVC Project\Project\BL\obj\Debug\net9.0\BLL.csproj.Up2Date
+D:\ITI\MVC Project\Project\BL\obj\Debug\net9.0\BLL.dll
+D:\ITI\MVC Project\Project\BL\obj\Debug\net9.0\refint\BLL.dll
+D:\ITI\MVC Project\Project\BL\obj\Debug\net9.0\BLL.pdb
+D:\ITI\MVC Project\Project\BL\obj\Debug\net9.0\ref\BLL.dll

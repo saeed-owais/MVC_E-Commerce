@@ -1,8 +1,92 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">MyShop</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link active" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Product" asp-action="Index">Products</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="Profile" asp-action="Index">Profile</a>
+                </li>
+
+                <li class="nav-item">
+                    <form asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="py-5 text-center text-light" style="background: linear-gradient(135deg, #1d3557, #457b9d);">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Welcome to MyShop</h1>
+        <p class="lead mb-4">Discover the best products at unbeatable prices.</p>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-light btn-lg fw-semibold shadow-sm">Shop Now</a>
+    </div>
+</section>
+
+<!-- Products Section -->
+<section class="container my-5">
+    <h2 class="text-center mb-4 fw-bold">Featured Products</h2>
+    <div class="row g-4">
+        <!-- Example Product Card -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 border-0">
+                <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="Product 1">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Product Name</h5>
+                    <p class="card-text text-muted">$49.99</p>
+                    <a href="#" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 border-0">
+                <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="Product 2">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Product Name</h5>
+                    <p class="card-text text-muted">$29.99</p>
+                    <a href="#" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 border-0">
+                <img src="https://via.placeholder.com/350x200" class="card-img-top" alt="Product 3">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Product Name</h5>
+                    <p class="card-text text-muted">$79.99</p>
+                    <a href="#" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-dark text-light text-center py-3 mt-5">
+    <div>© @DateTime.Now.Year - MyShop | All Rights Reserved</div>
+</footer>
+
+<!-- Bootstrap Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

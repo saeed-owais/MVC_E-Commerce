@@ -58,3 +58,18 @@ C:\Users\saide\source\repos\MVC_E-Commerce\DA\obj\Debug\net9.0\refint\DAL.dll
 C:\Users\saide\source\repos\MVC_E-Commerce\DA\obj\Debug\net9.0\DAL.pdb
 C:\Users\saide\source\repos\MVC_E-Commerce\DA\obj\Debug\net9.0\DAL.genruntimeconfig.cache
 C:\Users\saide\source\repos\MVC_E-Commerce\DA\obj\Debug\net9.0\ref\DAL.dll
+D:\ITI\MVC Project\Project\DA\bin\Debug\net9.0\DAL.deps.json
+D:\ITI\MVC Project\Project\DA\bin\Debug\net9.0\DAL.runtimeconfig.json
+D:\ITI\MVC Project\Project\DA\bin\Debug\net9.0\DAL.dll
+D:\ITI\MVC Project\Project\DA\bin\Debug\net9.0\DAL.pdb
+D:\ITI\MVC Project\Project\DA\obj\Debug\net9.0\DAL.csproj.AssemblyReference.cache
+D:\ITI\MVC Project\Project\DA\obj\Debug\net9.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\ITI\MVC Project\Project\DA\obj\Debug\net9.0\DAL.AssemblyInfoInputs.cache
+D:\ITI\MVC Project\Project\DA\obj\Debug\net9.0\DAL.AssemblyInfo.cs
+D:\ITI\MVC Project\Project\DA\obj\Debug\net9.0\DAL.csproj.CoreCompileInputs.cache
+D:\ITI\MVC Project\Project\DA\obj\Debug\net9.0\DAL.sourcelink.json
+D:\ITI\MVC Project\Project\DA\obj\Debug\net9.0\DAL.dll
+D:\ITI\MVC Project\Project\DA\obj\Debug\net9.0\refint\DAL.dll
+D:\ITI\MVC Project\Project\DA\obj\Debug\net9.0\DAL.pdb
+D:\ITI\MVC Project\Project\DA\obj\Debug\net9.0\DAL.genruntimeconfig.cache
+D:\ITI\MVC Project\Project\DA\obj\Debug\net9.0\ref\DAL.dll
