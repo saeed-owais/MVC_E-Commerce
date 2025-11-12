@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BLL.DTOs.CartItem;
+using DA.Models;
 
 namespace BLL.Mapper
 {
@@ -6,6 +8,9 @@ namespace BLL.Mapper
     {
         public CartItemProfile()
         {
+            CreateMap<CartItem, CartItemDTO>()
+                .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
+                .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Product.Price));
         }
     }
 }
