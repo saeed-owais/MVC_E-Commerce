@@ -1,108 +1,168 @@
-﻿
-@model IEnumerable<BLL.DTOs.OrderDTOs.OrderHistoryDto>
+﻿@model IEnumerable<BLL.DTOs.OrderDTOs.OrderHistoryDto>
 
-    <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Segoe UI', sans-serif;
-        }
+@{
+    ViewData["Title"] = "My Orders";
+}
 
-        .table thead th {
-            background-color: #e9ecef;
-            font-weight: 600;
-        }
+<div class="container mt-5 mb-5">
+    <!-- Page Header -->
+    <div class="mb-4">
+        <h2 class="fw-bold">
+            <i class="bi bi-bag-check-fill me-2"></i>My Orders
+        </h2>
+        <p class="text-muted">View and track all your order history</p>
+    </div>
 
-        .badge-status {
-            font-size: 0.85rem;
-            padding: 0.4em 0.7em;
-        }
-
-        .status-pending {
-            background-color: #ffc107;
-            color: #212529;
-        }
-
-        .status-shipped {
-            background-color: #0dcaf0;
-            color: #212529;
-        }
-
-        .status-delivered {
-            background-color: #28a745;
-        }
-
-        .status-cancelled {
-            background-color: #dc3545;
-        }
-
-        .btn-primary {
-            border-radius: 20px;
-        }
-
-        .card {
-            border-radius: 1rem;
-            border: none;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-        }
-    </style>
-@* </head> *@
-<body>
-
-    <div class="container mt-5 mb-5">
-        <div class="text-center mb-4">
-            <h2 class="fw-bold text-primary"><i class="bi bi-bag-check-fill me-2"></i>My Orders</h2>
-            <p class="text-muted">Here’s a summary of all your previous purchases</p>
+    <!-- Orders Card -->
+    <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header bg-primary text-white py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="bi bi-clock-history me-2"></i>Order History
+                </h5>
+                @if (Model != null && Model.Any())
+                {
+                    <span class="badge bg-light text-dark">@Model.Count() Total Orders</span>
+                }
+            </div>
         </div>
-
-        <div class="card p-4 shadow-sm">
-            <table class="table table-hover align-middle mb-0">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th class="text-end">Total</th>
-                        <th class="text-center">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if (Model != null && Model.Any())
-                    {
-                        foreach (var order in Model)
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4">
+                                <i class="bi bi-hash me-1"></i>Order ID
+                            </th>
+                            <th>
+                                <i class="bi bi-calendar-event me-1"></i>Date
+                            </th>
+                            <th>
+                                <i class="bi bi-clock-history me-1"></i>Status
+                            </th>
+                            <th class="text-end">
+                                <i class="bi bi-cash-stack me-1"></i>Total
+                            </th>
+                            <th class="text-center pe-4">
+                                <i class="bi bi-gear me-1"></i>Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var order in Model)
+                            {
+                                <tr>
+                                    <td class="ps-4">
+                                        <span class="fw-semibold text-primary">#@order.Id</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-calendar3 text-muted me-2"></i>
+                                            <span>@order.OrderDate.ToString("MMM dd, yyyy")</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge fs-6 px-3 py-2
+                                            @(order.Status == "Pending" ? "bg-warning text-dark" :
+                                              order.Status == "Shipped" ? "bg-info" :
+                                              order.Status == "Delivered" ? "bg-success" :
+                                              "bg-danger")">
+                                            <i class="bi 
+                                                @(order.Status == "Pending" ? "bi-hourglass-split" :
+                                                  order.Status == "Shipped" ? "bi-truck" :
+                                                  order.Status == "Delivered" ? "bi-check-circle" :
+                                                  "bi-x-circle") me-1"></i>
+                                            @order.Status
+                                        </span>
+                                    </td>
+                                    <td class="text-end">
+                                        <span class="fw-bold text-success fs-5">$@order.TotalAmount.ToString("0.00")</span>
+                                    </td>
+                                    <td class="text-center pe-4">
+                                        <a asp-action="Details" asp-route-id="@order.Id" class="btn btn-primary btn-sm">
+                                            <i class="bi bi-eye-fill me-1"></i> View Details
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
                         {
                             <tr>
-                                <td>@order.OrderDate.ToShortDateString()</td>
-                                <td>
-                                    <span class="badge badge-status
-                                                @(order.Status == "Pending" ? "status-pending" :
-                                                  order.Status == "Shipped" ? "status-shipped" :
-                                                  order.Status == "Delivered" ? "status-delivered" :
-                                                  "status-cancelled")">
-                                @order.Status
-                            </span>
-                        </td>
-                        <td class="text-end text-success fw-semibold">@order.TotalAmount</td>
-                        <td class="text-center">
-                            <a asp-action="Details" asp-route-id="@order.Id" class="btn btn-primary btn-sm">
-                                <i class="bi bi-eye-fill me-1"></i> View
-                            </a>
-                        </td>
-                    </tr>
-                                        }
-                    }
-                    else
-                    {
-                        <tr>
-                            <td colspan="4" class="text-center text-muted py-4">
-                                <i class="bi bi-clipboard-x fs-4 d-block mb-2"></i>
-                                You have no orders yet.
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                                <td colspan="5" class="text-center py-5">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <div class="mb-3">
+                                            <i class="bi bi-inbox text-muted" style="font-size: 4rem;"></i>
+                                        </div>
+                                        <h5 class="text-muted mb-2">No Orders Yet</h5>
+                                        <p class="text-muted mb-3">You haven't placed any orders. Start shopping now!</p>
+                                        <a asp-controller="Home" asp-action="Index" class="btn btn-primary">
+                                            <i class="bi bi-shop me-1"></i> Start Shopping
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
+    <!-- Quick Stats (Optional) -->
+    @if (Model != null && Model.Any())
+    {
+        var pendingCount = Model.Count(o => o.Status == "Pending");
+        var shippedCount = Model.Count(o => o.Status == "Shipped");
+        var deliveredCount = Model.Count(o => o.Status == "Delivered");
+        var totalSpent = Model.Sum(o => o.TotalAmount);
 
-</body>
+        <div class="row g-3 mt-4">
+            <div class="col-md-3 col-sm-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-hourglass-split text-warning fs-1"></i>
+                        <h3 class="mt-2 mb-0">@pendingCount</h3>
+                        <p class="text-muted small mb-0">Pending</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-truck text-info fs-1"></i>
+                        <h3 class="mt-2 mb-0">@shippedCount</h3>
+                        <p class="text-muted small mb-0">Shipped</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-check-circle text-success fs-1"></i>
+                        <h3 class="mt-2 mb-0">@deliveredCount</h3>
+                        <p class="text-muted small mb-0">Delivered</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <i class="bi bi-cash-stack text-primary fs-1"></i>
+                        <h3 class="mt-2 mb-0">$@totalSpent.ToString("0.00")</h3>
+                        <p class="text-muted small mb-0">Total Spent</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 
+    <!-- Back Button -->
+    <div class="mt-4">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">
+            <i class="bi bi-house-door me-1"></i> Back to Home
+        </a>
+    </div>
+</div>

@@ -2,10 +2,12 @@
 using AutoMapper;
 using BLL.DTOs.ReviewsDTOs;
 using BLL.Services.Review_Service;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce_MVC.Controllers
 {
+    [Authorize]
     public class ReviewsController : Controller
     {
         private readonly IReviewService _reviewService;

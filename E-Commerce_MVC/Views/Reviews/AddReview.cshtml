@@ -1,43 +1,23 @@
 ﻿@using BLL.DTOs.ReviewsDTOs
 @model CreateReviewDto
 
+@{
+    ViewData["Title"] = "Add Review";
+}
 
-    <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        .card {
-            border-radius: 1rem;
-            border: none;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        .form-label {
-            font-weight: 600;
-        }
-
-        .btn-success {
-            border-radius: 20px;
-            padding: 0.5rem 1.3rem;
-        }
-
-        textarea {
-            resize: none;
-        }
-    </style>
-<body>
-
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card p-4">
-                    <div class="text-center mb-3">
-                        <h3 class="fw-bold text-success">
-                            <i class="bi bi-star-fill me-2"></i>Add Review
-                        </h3>
-                        <p class="text-muted">Share your feedback about this product</p>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-header bg-success text-white py-3">
+                    <h4 class="mb-0">
+                        <i class="bi bi-star-fill me-2"></i>Write a Product Review
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <div class="alert alert-info border-0 shadow-sm mb-4">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <strong>Your opinion matters!</strong> Share your experience to help other customers make informed decisions.
                     </div>
 
                     <form asp-controller="Reviews" asp-action="AddReview" method="post">
@@ -45,32 +25,119 @@
                         <input type="hidden" asp-for="ProductId" />
                         <input type="hidden" asp-for="OrderId" />
 
-                        <!-- Rating -->
-                        <div class="mb-3">
-                            <label asp-for="Rating" class="form-label">Rating (1–5)</label>
-                            <input asp-for="Rating" type="number" class="form-control" min="1" max="5" required />
-                            <span asp-validation-for="Rating" class="text-danger"></span>
+                        <!-- Rating Section -->
+                        <div class="mb-4">
+                            <label asp-for="Rating" class="form-label fw-semibold">
+                                <i class="bi bi-star-half me-1"></i>Your Rating
+                            </label>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <input asp-for="Rating"
+                                           type="number"
+                                           class="form-control form-control-lg"
+                                           min="1"
+                                           max="5"
+                                           placeholder="Rate from 1 to 5"
+                                           required />
+                                    <span asp-validation-for="Rating" class="text-danger small"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="alert alert-light border mb-0 h-100 d-flex align-items-center">
+                                        <small class="text-muted mb-0">
+                                            <i class="bi bi-info-circle me-1"></i>
+                                            1 = Poor, 5 = Excellent
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Star Preview -->
+                            <div class="mt-3" id="starPreview">
+                                <span class="text-muted small">Preview: </span>
+                                <span id="stars" class="fs-5">
+                                    <i class="bi bi-star text-muted"></i>
+                                    <i class="bi bi-star text-muted"></i>
+                                    <i class="bi bi-star text-muted"></i>
+                                    <i class="bi bi-star text-muted"></i>
+                                    <i class="bi bi-star text-muted"></i>
+                                </span>
+                            </div>
                         </div>
 
-                        <!-- Comment -->
-                        <div class="mb-3">
-                            <label asp-for="Comment" class="form-label">Comment</label>
-                            <textarea asp-for="Comment" class="form-control" rows="4" placeholder="Write your review..." required></textarea>
-                            <span asp-validation-for="Comment" class="text-danger"></span>
+                        <!-- Comment Section -->
+                        <div class="mb-4">
+                            <label asp-for="Comment" class="form-label fw-semibold">
+                                <i class="bi bi-chat-left-text me-1"></i>Your Review
+                            </label>
+                            <textarea asp-for="Comment"
+                                      class="form-control"
+                                      rows="6"
+                                      placeholder="Tell us about your experience with this product..."
+                                      style="resize: vertical;"
+                                      required></textarea>
+                            <div class="form-text">
+                                <i class="bi bi-lightbulb me-1"></i>
+                                Tip: Include details about quality, features, and how the product met your expectations.
+                            </div>
+                            <span asp-validation-for="Comment" class="text-danger small"></span>
                         </div>
 
-                        <!-- Submit button -->
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-success">
-                                <i class="bi bi-check-circle me-1"></i>Submit Review
+                        <!-- Action Buttons -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a asp-controller="Orders" asp-action="Details" asp-route-id="@Model.OrderId" class="btn btn-outline-secondary px-4">
+                                <i class="bi bi-x-circle me-1"></i>Cancel
+                            </a>
+                            <button type="submit" class="btn btn-success btn-lg px-5">
+                                <i class="bi bi-send-fill me-1"></i>Submit Review
                             </button>
                         </div>
                     </form>
+                </div>
 
+                <!-- Guidelines Section -->
+                <div class="card-footer bg-light border-0 py-3">
+                    <h6 class="fw-semibold mb-2">
+                        <i class="bi bi-shield-check me-1"></i>Review Guidelines
+                    </h6>
+                    <ul class="small text-muted mb-0">
+                        <li>Be honest and objective in your review</li>
+                        <li>Focus on the product features and your experience</li>
+                        <li>Avoid inappropriate language or personal attacks</li>
+                        <li>Reviews are public and help other shoppers</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 
-</body>
+    <script>
+        // Star rating preview
+        document.addEventListener('DOMContentLoaded', function() {
+            const ratingInput = document.querySelector('input[name="Rating"]');
+            const starsContainer = document.getElementById('stars');
+
+            if (ratingInput && starsContainer) {
+                ratingInput.addEventListener('input', function() {
+                    updateStars(this.value);
+                });
+
+                function updateStars(rating) {
+                    const stars = starsContainer.querySelectorAll('i');
+                    const ratingValue = parseInt(rating) || 0;
+
+                    stars.forEach((star, index) => {
+                        if (index < ratingValue) {
+                            star.className = 'bi bi-star-fill text-warning';
+                        } else {
+                            star.className = 'bi bi-star text-muted';
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+}

@@ -1,132 +1,204 @@
 ﻿@using BLL.DTOs.ReviewsDTOs
-
-
 @model BLL.DTOs.OrderDTOs.OrderDTO
-@* @using BLL.DTOs.ReviewsDTOs *@
 
-    <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: 'Segoe UI', sans-serif;
-        }
+@{
+    ViewData["Title"] = "Order Details";
+}
 
-        .card {
-            border-radius: 1rem;
-            border: none;
-        }
+<div class="container mt-5 mb-5">
+    <!-- Page Header -->
+    <div class="mb-4">
+        <h2 class="fw-bold">
+            <i class="bi bi-receipt-cutoff me-2"></i>Order Details
+        </h2>
+        <p class="text-muted">View your order information and track your items</p>
+    </div>
 
-        .card-body p {
-            font-size: 0.95rem;
-        }
-
-        .table th {
-            font-weight: 600;
-        }
-
-        .badge-status {
-            font-size: 0.85rem;
-            padding: 0.4em 0.7em;
-        }
-
-        .status-pending {
-            background-color: #ffc107;
-            color: #212529;
-        }
-
-        .status-shipped {
-            background-color: #17a2b8;
-        }
-
-        .status-delivered {
-            background-color: #28a745;
-        }
-
-        .status-cancelled {
-            background-color: #dc3545;
-        }
-
-        .btn-outline-primary {
-            border-radius: 20px;
-        }
-    </style>
-<body>
-
-    <div class="container mt-5 mb-5">
-
-        <div class="text-center mb-4">
-            <h2 class="fw-bold text-primary">Order Details</h2>
+    <!-- Order Summary Card -->
+    <div class="card shadow-lg border-0 rounded-3 mb-4">
+        <div class="card-header bg-primary text-white py-3">
+            <h5 class="mb-0">
+                <i class="bi bi-info-circle me-2"></i>Order Summary
+            </h5>
         </div>
-
-        <div class="card shadow-sm mb-4">
-            <div class="card-body">
-                <div class="row mb-2">
-                    <div class="col-md-6">
-                        <p class="mb-1"><strong>Order ID:</strong> @Model.Id</p>
-                        <p class="mb-1">
-                            <strong>Status:</strong>
-                            <span class="badge badge-status
-                                @(Model.Status == "Pending" ? "status-pending" :
-                                                                    Model.Status == "Shipped" ? "status-shipped" :
-                                                                    Model.Status == "Delivered" ? "status-delivered" :
-                                                                    "status-cancelled")">
+        <div class="card-body p-4">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="text-muted small mb-1">
+                            <i class="bi bi-hash me-1"></i>Order ID
+                        </label>
+                        <p class="fw-bold fs-5 text-primary mb-0">#@Model.Id</p>
+                    </div>
+                    <div>
+                        <label class="text-muted small mb-1">
+                            <i class="bi bi-clock-history me-1"></i>Order Status
+                        </label>
+                        <div>
+                            <span class="badge fs-6 px-3 py-2
+                                @(Model.Status == "Pending" ? "bg-warning text-dark" :
+                                                                    Model.Status == "Shipped" ? "bg-info" :
+                                                                    Model.Status == "Delivered" ? "bg-success" :
+                                                                    "bg-danger")">
+                                <i class="bi
+                                    @(Model.Status == "Pending" ? "bi-hourglass-split" :
+                                                                         Model.Status == "Shipped" ? "bi-truck" :
+                                                                         Model.Status == "Delivered" ? "bi-check-circle" :
+                                                                         "bi-x-circle") me-1"></i>
                                 @Model.Status
                             </span>
-                        </p>
+                        </div>
                     </div>
-                    <div class="col-md-6 text-md-end">
-                        <p class="mb-1"><strong>Date:</strong> @Model.OrderDate.ToShortDateString()</p>
-                        <p class="mb-0">
-                            <strong>Total:</strong>
-                            <span class="text-success fw-bold">@Model.TotalAmount</span>
-                        </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="mb-3">
+                        <label class="text-muted small mb-1">
+                            <i class="bi bi-calendar-event me-1"></i>Order Date
+                        </label>
+                        <p class="fw-semibold fs-5 mb-0">@Model.OrderDate.ToString("MMM dd, yyyy")</p>
+                    </div>
+                    <div>
+                        <label class="text-muted small mb-1">
+                            <i class="bi bi-cash-stack me-1"></i>Total Amount
+                        </label>
+                        <p class="fw-bold fs-4 text-success mb-0">$@Model.TotalAmount.ToString("0.00")</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="card shadow-sm">
-            <div class="card-body">
-                <h4 class="card-title mb-3 text-secondary fw-semibold">Order Items</h4>
-                <table class="table table-hover align-middle">
+    <!-- Order Items Card -->
+    <div class="card shadow-lg border-0 rounded-3 mb-4">
+        <div class="card-header bg-info text-white py-3">
+            <h5 class="mb-0">
+                <i class="bi bi-bag-check me-2"></i>Order Items
+            </h5>
+        </div>
+        <div class="card-body p-4">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
                     <thead class="table-light">
                         <tr>
-                            <th>Product</th>
-                            <th class="text-center">Quantity</th>
-                            <th class="text-center">Price</th>
-                            <th class="text-center">Action</th>
+                            <th>
+                                <i class="bi bi-box me-1"></i>Product
+                            </th>
+                            <th class="text-center">
+                                <i class="bi bi-hash me-1"></i>Quantity
+                            </th>
+                            <th class="text-center">
+                                <i class="bi bi-tag me-1"></i>Price
+                            </th>
+                            <th class="text-center">
+                                <i class="bi bi-star me-1"></i>Action
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model.OrderItems)
                         {
                             <tr>
-                                <td>@item.ProductName</td>
-                                <td class="text-center">@item.Quantity</td>
-                                <td class="text-center text-success fw-semibold">@item.Price</td>
+                                <td class="fw-semibold">
+                                    <i class="bi bi-box-seam text-primary me-2"></i>@item.ProductName
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge bg-secondary fs-6">@item.Quantity</span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="text-success fw-bold">$@item.Price.ToString("0.00")</span>
+                                </td>
                                 <td class="text-center">
                                     <a asp-action="Open"
                                        asp-controller="Reviews"
                                        asp-route-productId="@item.ProductId"
                                        asp-route-orderId="@Model.Id"
                                        class="btn btn-outline-primary btn-sm">
-                                        <i class="bi bi-pencil-square me-1"></i> Add Review
+                                        <i class="bi bi-pencil-square me-1"></i> Write Review
                                     </a>
                                 </td>
                             </tr>
                         }
                     </tbody>
+                    <tfoot class="table-light">
+                        <tr>
+                            <td colspan="2" class="text-end fw-bold">Total Items:</td>
+                            <td class="text-center">
+                                <span class="badge bg-primary fs-6">@Model.OrderItems.Count()</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>
-
-        <div class="text-end mt-4">
-            <a asp-action="Index" class="btn btn-secondary">
-                <i class="bi bi-arrow-left-circle me-1"></i> Back to Orders
-            </a>
-        </div>
-
     </div>
 
-    @* @await Html.PartialAsync("_AddReviewPartial", new CreatePartailReviewViewModel { ProductId = "123" }) *@
+    <!-- Order Timeline (Optional Enhancement) -->
+    @if (Model.Status != "Cancelled")
+    {
+        <div class="card shadow-lg border-0 rounded-3 mb-4">
+            <div class="card-header bg-secondary text-white py-3">
+                <h5 class="mb-0">
+                    <i class="bi bi-diagram-3 me-2"></i>Order Progress
+                </h5>
+            </div>
+            <div class="card-body p-4">
+                <div class="row text-center">
+                    <div class="col-md-3">
+                        <div class="@(Model.Status == "Pending" || Model.Status == "Shipped" || Model.Status == "Delivered" ? "text-success" : "text-muted")">
+                            <i class="bi bi-check-circle-fill fs-1"></i>
+                            <p class="fw-semibold mt-2 mb-0">Order Placed</p>
+                            <small class="text-muted">@Model.OrderDate.ToString("MMM dd")</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="@(Model.Status == "Shipped" || Model.Status == "Delivered" ? "text-success" : "text-muted")">
+                            <i class="bi @(Model.Status == "Shipped" || Model.Status == "Delivered" ? "bi-check-circle-fill" : "bi-circle") fs-1"></i>
+                            <p class="fw-semibold mt-2 mb-0">Shipped</p>
+                            <small class="text-muted">In transit</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="@(Model.Status == "Delivered" ? "text-success" : "text-muted")">
+                            <i class="bi @(Model.Status == "Delivered" ? "bi-check-circle-fill" : "bi-circle") fs-1"></i>
+                            <p class="fw-semibold mt-2 mb-0">Delivered</p>
+                            <small class="text-muted">Awaiting delivery</small>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="text-muted">
+                            <i class="bi bi-circle fs-1"></i>
+                            <p class="fw-semibold mt-2 mb-0">Completed</p>
+                            <small class="text-muted">Order complete</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 
-</body>
+    <!-- Action Buttons -->
+    <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center">
+        <a asp-action="Index" class="btn btn-secondary btn-lg px-4">
+            <i class="bi bi-arrow-left-circle me-1"></i> Back to Orders
+        </a>
+
+        <div class="d-flex gap-2">
+            @if (Model.Status == "Delivered")
+            {
+                <button class="btn btn-outline-success btn-lg px-4" onclick="window.print()">
+                    <i class="bi bi-printer me-1"></i> Print Invoice
+                </button>
+            }
+
+            @if (Model.Status == "Pending")
+            {
+                <button class="btn btn-outline-danger btn-lg px-4" onclick="if(confirm('Are you sure you want to cancel this order?')) { alert('Cancel functionality to be implemented'); }">
+                    <i class="bi bi-x-circle me-1"></i> Cancel Order
+                </button>
+            }
+        </div>
+    </div>
+</div>
+
+@* @await Html.PartialAsync("_AddReviewPartial", new CreatePartailReviewViewModel { ProductId = "123" }) *@

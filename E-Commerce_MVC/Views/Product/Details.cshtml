@@ -1,29 +1,171 @@
 ﻿@using BLL.DTOs.ReviewsDTOs
 @model E_Commerce_MVC.Models.Product.ProductDetailsViewModel
 
-<div class="row mt-4">
-    <div class="col-md-6">
-        <img src="@Model.Product.ImageUrl" alt="@Model.Product.Name" class="img-fluid rounded" />
+@{
+    ViewData["Title"] = Model.Product.Name;
+}
+
+<div class="container mt-5 mb-5">
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-house-door me-1"></i>Home
+                </a>
+            </li>
+            <li class="breadcrumb-item">
+                <a asp-controller="Product" asp-action="Index">Products</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Product.Name</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4">
+        <!-- Product Image -->
+        <div class="col-lg-6">
+            <div class="card shadow-lg border-0 rounded-3 overflow-hidden">
+                <div class="card-body p-0">
+                    <img src="@Model.Product.ImageUrl"
+                         alt="@Model.Product.Name"
+                         class="img-fluid w-100"
+                         style="object-fit: cover; max-height: 500px;" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Details -->
+        <div class="col-lg-6">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-body p-4">
+                    <!-- Product Name -->
+                    <h2 class="fw-bold mb-3">@Model.Product.Name</h2>
+
+                    <!-- Product Price -->
+                    <div class="mb-4">
+                        <h3 class="text-success fw-bold mb-0">
+                            <i class="bi bi-tag-fill me-2"></i>@Model.Product.Price.ToString("C")
+                        </h3>
+                    </div>
+
+                    <!-- Product Description -->
+                    <div class="mb-4">
+                        <h5 class="fw-semibold mb-2">
+                            <i class="bi bi-info-circle me-2"></i>Description
+                        </h5>
+                        <p class="text-muted">@Model.Product.Description</p>
+                    </div>
+
+                    <!-- Product Category -->
+                    <div class="mb-4">
+                        <h6 class="fw-semibold mb-2">
+                            <i class="bi bi-bookmark-fill me-2"></i>Category
+                        </h6>
+                        <span class="badge bg-primary fs-6 px-3 py-2">@Model.Product.CategoryName</span>
+                    </div>
+
+                    <!-- Divider -->
+                    <hr class="my-4" />
+
+                    <!-- Add to Cart Form -->
+                    <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                        <input type="hidden" name="productId" value="@Model.Product.Id" />
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">
+                                <i class="bi bi-hash me-1"></i>Quantity
+                            </label>
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <input type="number"
+                                           name="qty"
+                                           value="@Model.Quantity"
+                                           min="1"
+                                           max="100"
+                                           class="form-control form-control-lg"
+                                           placeholder="Enter quantity" />
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn-success btn-lg w-100">
+                                        <i class="bi bi-cart-plus me-2"></i>Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex flex-wrap gap-2">
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left-circle me-1"></i>Back to Products
+                        </a>
+                        <button class="btn btn-outline-primary" onclick="navigator.share ? navigator.share({title: '@Model.Product.Name', url: window.location.href}) : alert('Share feature not supported')">
+                            <i class="bi bi-share me-1"></i>Share
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Features -->
+            <div class="card shadow-sm border-0 rounded-3 mt-4">
+                <div class="card-body p-4">
+                    <h5 class="fw-semibold mb-3">
+                        <i class="bi bi-shield-check me-2"></i>Why Buy From Us
+                    </h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-truck text-primary me-2 fs-4"></i>
+                                <div>
+                                    <h6 class="fw-semibold mb-1">Free Shipping</h6>
+                                    <small class="text-muted">On orders over $50</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-arrow-repeat text-success me-2 fs-4"></i>
+                                <div>
+                                    <h6 class="fw-semibold mb-1">Easy Returns</h6>
+                                    <small class="text-muted">30-day return policy</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-shield-fill-check text-info me-2 fs-4"></i>
+                                <div>
+                                    <h6 class="fw-semibold mb-1">Secure Payment</h6>
+                                    <small class="text-muted">100% secure transactions</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex align-items-start">
+                                <i class="bi bi-headset text-warning me-2 fs-4"></i>
+                                <div>
+                                    <h6 class="fw-semibold mb-1">24/7 Support</h6>
+                                    <small class="text-muted">Dedicated customer service</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="col-md-6">
-        <h2>@Model.Product.Name</h2>
-        <p class="lead text-success">@Model.Product.Price.ToString("C")</p>
-        <p>@Model.Product.Description</p>
-        <p><strong>Category:</strong> @Model.Product.CategoryName</p>
-
-        <form asp-controller="Cart" asp-action="AddToCart" method="post">
-            <input type="hidden" name="productId" value="@Model.Product.Id" />
-            <div class="input-group w-50 mb-3">
-                <input type="number" name="qty" value="@Model.Quantity" min="1" class="form-control" />
-                <button type="submit" class="btn btn-success">Add to Cart</button>
+    <!-- Reviews Section -->
+    <div class="mt-5">
+        <div class="card shadow-lg border-0 rounded-3">
+            <div class="card-header bg-primary text-white py-3">
+                <h4 class="mb-0">
+                    <i class="bi bi-star-fill me-2"></i>Customer Reviews
+                </h4>
             </div>
-        </form>
-
-        <a asp-action="Index" class="btn btn-outline-secondary">Back to Products</a>
+            <div class="card-body p-4">
+                @await Html.PartialAsync("_AddReviewPartial", new CreatePartailReviewViewModel { ProductId = @Model.Product.Id })
+            </div>
+        </div>
     </div>
 </div>
-
-
-@await Html.PartialAsync("_AddReviewPartial", new CreatePartailReviewViewModel { ProductId = @Model.Product.Id })
-

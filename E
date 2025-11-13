@@ -1,4 +1,4 @@
-﻿-Commerce_MVC\Views\Checkout\Index.cshtml
+-Commerce_MVC\Views\Checkout\Index.cshtml
 @model CheckoutViewModel
 @{
     ViewData["Title"] = "Checkout";

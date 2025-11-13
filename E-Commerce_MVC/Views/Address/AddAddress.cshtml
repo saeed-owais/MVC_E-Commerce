@@ -5,40 +5,59 @@
 
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0">Add New Address</h5>
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-header bg-primary text-white py-3">
+                    <h4 class="mb-0">
+                        <i class="bi bi-geo-alt-fill me-2"></i>Add New Address
+                    </h4>
                 </div>
-                <div class="card-body">
+                <div class="card-body p-4">
                     <form asp-action="AddAddress" method="post">
-                        <div class="mb-3">
-                            <label asp-for="Street" class="form-label"></label>
-                            <input asp-for="Street" class="form-control" placeholder="Street address" />
-                            <span asp-validation-for="Street" class="text-danger"></span>
-                        </div>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label asp-for="Street" class="form-label fw-semibold">
+                                    <i class="bi bi-signpost me-1"></i>Street Address
+                                </label>
+                                <input asp-for="Street" class="form-control form-control-lg" placeholder="Enter your street address" />
+                                <span asp-validation-for="Street" class="text-danger small"></span>
+                            </div>
 
-                        <div class="mb-3">
-                            <label asp-for="City" class="form-label"></label>
-                            <input asp-for="City" class="form-control" placeholder="City" />
-                            <span asp-validation-for="City" class="text-danger"></span>
-                        </div>
+                            <div class="col-md-6">
+                                <label asp-for="City" class="form-label fw-semibold">
+                                    <i class="bi bi-building me-1"></i>City
+                                </label>
+                                <input asp-for="City" class="form-control" placeholder="Enter city name" />
+                                <span asp-validation-for="City" class="text-danger small"></span>
+                            </div>
 
-                        <div class="mb-3">
-                            <label asp-for="PostalCode" class="form-label"></label>
-                            <input asp-for="PostalCode" class="form-control" placeholder="Postal Code" />
-                            <span asp-validation-for="PostalCode" class="text-danger"></span>
-                        </div>
+                            <div class="col-md-6">
+                                <label asp-for="PostalCode" class="form-label fw-semibold">
+                                    <i class="bi bi-mailbox me-1"></i>Postal Code
+                                </label>
+                                <input asp-for="PostalCode" class="form-control" placeholder="Enter postal code" />
+                                <span asp-validation-for="PostalCode" class="text-danger small"></span>
+                            </div>
 
-                        <div class="mb-3">
-                            <label asp-for="Country" class="form-label"></label>
-                            <input asp-for="Country" class="form-control" placeholder="Country" />
-                            <span asp-validation-for="Country" class="text-danger"></span>
-                        </div>
+                            <div class="col-12">
+                                <label asp-for="Country" class="form-label fw-semibold">
+                                    <i class="bi bi-flag me-1"></i>Country
+                                </label>
+                                <input asp-for="Country" class="form-control" placeholder="Enter country name" />
+                                <span asp-validation-for="Country" class="text-danger small"></span>
+                            </div>
 
-                        <button type="submit" class="btn btn-success w-100">
-                            <i class="bi bi-plus-circle me-1"></i> Save Address
-                        </button>
+                            <div class="col-12 mt-4">
+                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <a href="@Url.Action("Index", "Address")" class="btn btn-outline-secondary px-4">
+                                        <i class="bi bi-x-circle me-1"></i>Cancel
+                                    </a>
+                                    <button type="submit" class="btn btn-success px-4">
+                                        <i class="bi bi-check-circle me-1"></i>Save Address
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>

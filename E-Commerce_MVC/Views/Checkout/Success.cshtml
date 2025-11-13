@@ -1,11 +1,95 @@
 ﻿@{
     ViewData["Title"] = "Order Success";
 }
-<div class="container mt-5 text-center">
-    <div class="mb-3">
-        <h2 class="text-success">✅ Thank you! Your order is confirmed.</h2>
-        <p class="text-muted">Order ID: <strong>@ViewBag.OrderId</strong></p>
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-body p-5 text-center">
+                    <!-- Success Icon -->
+                    <div class="mb-4">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-success bg-opacity-10 rounded-circle" style="width: 120px; height: 120px;">
+                            <i class="bi bi-check-circle-fill text-success" style="font-size: 4rem;"></i>
+                        </div>
+                    </div>
+
+                    <!-- Success Message -->
+                    <h2 class="fw-bold text-success mb-3">
+                        Order Confirmed!
+                    </h2>
+                    <p class="lead text-muted mb-4">
+                        Thank you for your purchase. Your order has been successfully placed.
+                    </p>
+
+                    <!-- Order Details -->
+                    <div class="card bg-light border-0 mb-4">
+                        <div class="card-body py-3">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 text-md-start text-center mb-2 mb-md-0">
+                                    <small class="text-muted d-block">Order Number</small>
+                                    <strong class="fs-5 text-primary">
+                                        <i class="bi bi-receipt me-1"></i>#@ViewBag.OrderId
+                                    </strong>
+                                </div>
+                                <div class="col-md-6 text-md-end text-center">
+                                    <small class="text-muted d-block">Order Date</small>
+                                    <strong class="fs-6">@DateTime.Now.ToString("MMM dd, yyyy")</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Information Message -->
+                    <div class="alert alert-info border-0 shadow-sm mb-4">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <strong>What's next?</strong> We'll send you a confirmation email with your order details and tracking information.
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a class="btn btn-primary btn-lg px-4" asp-controller="Orders" asp-action="Index">
+                            <i class="bi bi-box-seam me-2"></i>View Order Details
+                        </a>
+                        <a class="btn btn-outline-secondary btn-lg px-4" asp-controller="Product" asp-action="Index">
+                            <i class="bi bi-shop me-2"></i>Continue Shopping
+                        </a>
+                    </div>
+
+                    <!-- Additional Info -->
+                    <div class="mt-5 pt-4 border-top">
+                        <div class="row g-3 text-start">
+                            <div class="col-md-4">
+                                <div class="d-flex align-items-start">
+                                    <i class="bi bi-truck text-primary me-2" style="font-size: 1.5rem;"></i>
+                                    <div>
+                                        <h6 class="fw-semibold mb-1">Fast Delivery</h6>
+                                        <small class="text-muted">Your order will be delivered soon</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex align-items-start">
+                                    <i class="bi bi-shield-check text-success me-2" style="font-size: 1.5rem;"></i>
+                                    <div>
+                                        <h6 class="fw-semibold mb-1">Secure Payment</h6>
+                                        <small class="text-muted">Your payment is protected</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="d-flex align-items-start">
+                                    <i class="bi bi-headset text-info me-2" style="font-size: 1.5rem;"></i>
+                                    <div>
+                                        <h6 class="fw-semibold mb-1">24/7 Support</h6>
+                                        <small class="text-muted">We're here to help you</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <a class="btn btn-outline-primary" asp-controller="Orders" asp-action="Index">View Order Details</a>
-    <a class="btn btn-primary ms-2" asp-controller="Home" asp-action="Index">Continue Shopping</a>
 </div>

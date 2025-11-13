@@ -50,7 +50,7 @@
 </html>
  *@
 
-
+@* 
 
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<DA.Models.ApplicationUser> SignInManager
@@ -168,6 +168,133 @@
         <div class="container">
             <p>&copy; @DateTime.Now.Year E-Commerce. All rights reserved.</p>
             <small class="d-block">Designed for clean and simple online shopping experience.</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html> *@
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<DA.Models.ApplicationUser> SignInManager
+@inject UserManager<DA.Models.ApplicationUser> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - .NET Ninjas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" />
+    @RenderSection("Styles", required: false)
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-primary fs-4" asp-area="" asp-controller="Home" asp-action="Index">
+                <i class="bi bi-shop"></i> E-Commerce
+            </a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link px-3 rounded-2" asp-controller="Home" asp-action="Index">
+                            <i class="bi bi-house-door me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 rounded-2" asp-controller="Product" asp-action="Index">
+                            <i class="bi bi-grid me-1"></i>Products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 rounded-2 position-relative" asp-controller="Cart" asp-action="Index">
+                            <i class="bi bi-cart3 me-1"></i>Cart
+                        </a>
+                    </li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle px-3 rounded-2" href="#" id="userDropdown" role="button"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle me-1"></i>Account
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+                                <li><a class="dropdown-item" asp-controller="Orders" asp-action="Index"><i class="bi bi-bag me-2"></i>Orders</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item text-danger" asp-controller="Account" asp-action="SignOut">
+                                        <i class="bi bi-box-arrow-right me-2"></i>Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link px-3 rounded-2" asp-controller="Account" asp-action="Login">
+                                <i class="bi bi-box-arrow-in-right me-1"></i>Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-primary btn-sm px-3" asp-controller="Account" asp-action="Register">
+                                <i class="bi bi-person-plus me-1"></i>Sign Up
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="container my-4 flex-grow-1">
+        <div class="animate__animated animate__fadeIn">
+            @RenderBody()
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-top mt-auto py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h5 class="fw-bold text-primary">E-Commerce</h5>
+                    <p class="text-muted small mb-0">Your trusted online shopping destination</p>
+                </div>
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <h6 class="fw-semibold mb-3">Quick Links</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">About Us</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Contact</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="#" class="text-decoration-none text-muted">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6 class="fw-semibold mb-3">Follow Us</h6>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-muted fs-5"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-muted fs-5"><i class="bi bi-twitter"></i></a>
+                        <a href="#" class="text-muted fs-5"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-muted fs-5"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-3">
+            <div class="text-center text-muted small">
+                <p class="mb-0">&copy; @DateTime.Now.Year E-Commerce. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
