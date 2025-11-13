@@ -2,8 +2,9 @@
 
 namespace BLL.DTOs.Admin
 {
-    public class ProductAdminDto
+    public class UpdateProductDto
     {
+        [Required]
         public string Id { get; set; } = string.Empty;
 
         [Display(Name = "Product Name")]
@@ -25,7 +26,7 @@ namespace BLL.DTOs.Admin
         [Display(Name = "Category")]
         [Required(ErrorMessage = "Please select a category")]
         public string CategoryId { get; set; } = string.Empty;
+
         public string? ImageUrl { get; set; }
-        public string? CategoryName { get; set; }
     }
 }

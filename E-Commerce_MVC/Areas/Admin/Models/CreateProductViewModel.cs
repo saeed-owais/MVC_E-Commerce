@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BLL.DTOs.Admin
+namespace E_Commerce_MVC.Areas.Admin.Models
 {
-    public class ProductAdminDto
+    public class CreateProductViewModel
     {
-        public string Id { get; set; } = string.Empty;
-
         [Display(Name = "Product Name")]
         [Required(ErrorMessage = "Product name is required")]
         [MaxLength(200)]
@@ -25,7 +23,8 @@ namespace BLL.DTOs.Admin
         [Display(Name = "Category")]
         [Required(ErrorMessage = "Please select a category")]
         public string CategoryId { get; set; } = string.Empty;
-        public string? ImageUrl { get; set; }
-        public string? CategoryName { get; set; }
+
+        [Display(Name = "Product Image")]
+        public IFormFile? ImageFile { get; set; }
     }
 }

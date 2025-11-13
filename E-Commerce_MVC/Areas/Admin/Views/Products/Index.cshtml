@@ -9,9 +9,11 @@
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
-<table class="table">
+<table class="table align-middle">
     <thead>
         <tr>
+            <th>Image</th>
+
             <th>@Html.DisplayNameFor(model => model.Name)</th>
             <th>@Html.DisplayNameFor(model => model.CategoryName)</th>
             <th>@Html.DisplayNameFor(model => model.Price)</th>
@@ -23,6 +25,17 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                    {
+                        <img src="@item.ImageUrl" alt="@item.Name" style="width: 70px; height: 70px; object-fit: cover; border-radius: 5px;" />
+                    }
+                    else
+                    {
+                        <span class="text-muted" style="font-size: 0.8rem;">No Image</span>
+                    }
+                </td>
+
                 <td>@Html.DisplayFor(modelItem => item.Name)</td>
                 <td>@Html.DisplayFor(modelItem => item.CategoryName)</td>
                 <td>@Html.DisplayFor(modelItem => item.Price)</td>

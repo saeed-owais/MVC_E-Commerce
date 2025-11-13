@@ -8,9 +8,9 @@ namespace BLL.Services
 
         Task<ProductAdminDto?> GetProductByIdAsync(string id, CancellationToken cancellationToken = default);
 
-        Task<ProductAdminDto> CreateProductAsync(ProductAdminDto productDto, CancellationToken cancellationToken = default);
+        Task<ProductAdminDto> CreateProductAsync(CreateProductDto productDto, CancellationToken cancellationToken = default);
 
-        Task UpdateProductAsync(ProductAdminDto productDto, CancellationToken cancellationToken = default);
+        Task UpdateProductAsync(UpdateProductDto productDto, CancellationToken cancellationToken = default);
 
         Task DeleteProductAsync(string id, CancellationToken cancellationToken = default);
     }

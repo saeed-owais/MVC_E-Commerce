@@ -1,13 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BLL.DTOs.Admin
+namespace E_Commerce_MVC.Areas.Admin.Models
 {
-    public class ProductAdminDto
+    public class EditProductViewModel
     {
+        [Required]
         public string Id { get; set; } = string.Empty;
+        public string? ExistingImageUrl { get; set; }
 
         [Display(Name = "Product Name")]
-        [Required(ErrorMessage = "Product name is required")]
+        [Required]
         [MaxLength(200)]
         public string Name { get; set; } = string.Empty;
 
@@ -15,17 +17,18 @@ namespace BLL.DTOs.Admin
         public string? Description { get; set; }
 
         [Required]
-        [Range(0.01, 100000.00, ErrorMessage = "Price must be greater than 0")]
+        [Range(0.01, 100000.00)]
         public decimal Price { get; set; }
 
         [Required]
-        [Range(0, 10000, ErrorMessage = "Stock must be 0 or more")]
+        [Range(0, 10000)]
         public int Stock { get; set; }
 
         [Display(Name = "Category")]
-        [Required(ErrorMessage = "Please select a category")]
+        [Required]
         public string CategoryId { get; set; } = string.Empty;
-        public string? ImageUrl { get; set; }
-        public string? CategoryName { get; set; }
+
+        [Display(Name = "Product Image")]
+        public IFormFile? ImageFile { get; set; }
     }
 }

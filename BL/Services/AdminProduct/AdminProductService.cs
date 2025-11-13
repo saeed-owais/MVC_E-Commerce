@@ -1,16 +1,13 @@
 ﻿using AutoMapper;
 using BLL.DTOs.Admin;
-using DA.Models;
 using DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
-
 namespace BLL.Services.AdminProduct
 {
     public class AdminProductService : IAdminProductService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-
         public AdminProductService(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
@@ -34,7 +31,7 @@ namespace BLL.Services.AdminProduct
                                 .FirstOrDefaultAsync(cancellationToken);
         }
 
-        public async Task<ProductAdminDto> CreateProductAsync(ProductAdminDto productDto, CancellationToken cancellationToken = default)
+        public async Task<ProductAdminDto> CreateProductAsync(CreateProductDto productDto, CancellationToken cancellationToken = default)
         {
             var categoryExists = await _unitOfWork.Categories.GetByIdAsync(productDto.CategoryId, cancellationToken);
             if (categoryExists == null)
@@ -50,7 +47,7 @@ namespace BLL.Services.AdminProduct
             return _mapper.Map<ProductAdminDto>(product);
         }
 
-        public async Task UpdateProductAsync(ProductAdminDto productDto, CancellationToken cancellationToken = default)
+        public async Task UpdateProductAsync(UpdateProductDto productDto, CancellationToken cancellationToken = default)
         {
             var existingProduct = await _unitOfWork.Products.GetByIdAsync(productDto.Id, cancellationToken);
             if (existingProduct == null)

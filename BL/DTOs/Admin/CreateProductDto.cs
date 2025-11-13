@@ -2,9 +2,8 @@
 
 namespace BLL.DTOs.Admin
 {
-    public class ProductAdminDto
+    public class CreateProductDto
     {
-        public string Id { get; set; } = string.Empty;
 
         [Display(Name = "Product Name")]
         [Required(ErrorMessage = "Product name is required")]
@@ -22,10 +21,11 @@ namespace BLL.DTOs.Admin
         [Range(0, 10000, ErrorMessage = "Stock must be 0 or more")]
         public int Stock { get; set; }
 
+        [Display(Name = "Product Image")]
+        public string? ImageURL { get; set; }
+
         [Display(Name = "Category")]
         [Required(ErrorMessage = "Please select a category")]
         public string CategoryId { get; set; } = string.Empty;
-        public string? ImageUrl { get; set; }
-        public string? CategoryName { get; set; }
     }
 }
