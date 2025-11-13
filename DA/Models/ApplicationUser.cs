@@ -8,8 +8,8 @@ namespace DA.Models
     {
         [Required, MaxLength(150)]
         public string FullName { get; set; } = string.Empty;
-
-        public ICollection<Address>? Addresses { get; set; }
+        public string? ImageURL { get; set; }
+        public string Address { get; set; }
         public ICollection<Order>? Orders { get; set; }
         public ICollection<Review>? Reviews { get; set; }
 

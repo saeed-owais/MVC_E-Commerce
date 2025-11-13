@@ -1,0 +1,47 @@
+﻿@using DAL.ViewModels
+@model ProfileViewModel
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-lg border-0 rounded-4 animate__animated animate__fadeIn p-3">
+                <div class="card-header bg-primary text-white rounded-top-4 text-center py-3">
+                    <h3 class="mb-0">My Profile</h3>
+                </div>
+                <div class="card-body d-flex flex-wrap align-items-center justify-content-between p-4">
+
+                    <div class="profile-info flex-grow-1 pe-4">
+                        <h4 class="card-title fw-bold mb-2">@Model.Name</h4>
+                        <p class="text-muted mb-2"><i class="bi bi-envelope"></i> @Model.Email</p>
+                        <p class="text-muted mb-2"><i class="bi bi-telephone"></i> @Model.Phone</p>
+                        <p class="text-muted mb-2">Status: <span class="badge @(Model.Status == "Active" ? "bg-success" : "bg-secondary")">@Model.Status</span></p>
+                        <p class="text-muted mb-2">Joined: @Model.JoinDate.ToString("dd MMM yyyy")</p>
+                        <p class="text-muted mb-3"><i class="bi bi-geo-alt"></i> @Model.Address</p>
+
+                        <div class="d-flex gap-2 flex-wrap">
+                            <a asp-controller="Account" asp-action="Edit" class="btn btn-outline-primary px-4 py-2 shadow-sm">Edit Profile</a>
+                            <a asp-controller="Account" asp-action="ChangePassword" class="btn btn-outline-secondary px-4 py-2 shadow-sm">Change Password</a>
+                            <form asp-controller="Account" asp-action="SignOut" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-danger px-4 py-2 shadow-sm">Sign Out</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="profile-image text-center">
+                        <img src="@(string.IsNullOrEmpty(Model.ImageURL) ? "/images/default-user.png" : Model.ImageURL)"
+                             alt="Profile Image" class="rounded-circle border border-3 border-primary" width="180" height="180" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+}

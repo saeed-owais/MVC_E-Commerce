@@ -77,6 +77,10 @@
     ViewData["Title"] = "Register";
 }
 
+
+
+<link rel="stylesheet" href="~/css/site.css" />
+
 <div class="container">
     <div class="row justify-content-center py-5">
         <div class="col-md-6 col-lg-5">
@@ -178,13 +182,16 @@
                             </div>
                         </div>
 
-                        <!-- Submit Button -->
-                        <div class="d-grid mb-3">
-                            <button type="submit" class="btn btn-primary btn-lg">
-                                <i class="bi bi-check-circle me-2"></i>Create Account
-                            </button>
-                        </div>
-                    </form>
+            <div class="mb-3">
+                <label asp-for="Country" class="form-label"></label>
+                <input asp-for="Country" type="tel" class="form-control" />
+                <span asp-validation-for="Country" class="text-danger"></span>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">Create Account</button>
+            </div>
+        </form>
 
                     <!-- Divider -->
                     <div class="position-relative my-4">
