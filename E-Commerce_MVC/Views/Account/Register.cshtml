@@ -75,9 +75,8 @@
 @using E_Commerce_MVC.ViewModels
 @model E_Commerce_MVC.ViewModels.RegisterViewModel
 
-@{
-    ViewData["Title"] = "Register";
-}
+
+
 <link rel="stylesheet" href="~/css/site.css" />
 
 <h1 class="text-center mb-4">Register</h1>
@@ -124,6 +123,12 @@
                 <label asp-for="Phone" class="form-label"></label>
                 <input asp-for="Phone" type="tel" class="form-control" />
                 <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Country" class="form-label"></label>
+                <input asp-for="Country" type="tel" class="form-control" />
+                <span asp-validation-for="Country" class="text-danger"></span>
             </div>
 
             <div class="d-grid">

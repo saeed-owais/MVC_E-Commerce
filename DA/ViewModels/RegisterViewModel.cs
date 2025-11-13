@@ -37,5 +37,10 @@ namespace E_Commerce_MVC.ViewModels
         [Required(ErrorMessage = "Phone number is required")]
         [Phone(ErrorMessage = "Invalid phone number")] 
         public string Phone { get ; set; }
+
+        [Required(ErrorMessage = "Field is required")]
+        public string Country { get ; set; }
+
+
     }
 }
