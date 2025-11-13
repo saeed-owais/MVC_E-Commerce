@@ -7,7 +7,9 @@ using BLL.Services.Cart;
 using BLL.Services.Cartitem;
 using BLL.Services.Category;
 using BLL.Services.Order;
+using BLL.Services.Order_Service;
 using BLL.Services.Product;
+using BLL.Services.Review_Service;
 using DA;
 using DA.Models;
 using DAL.Data;
@@ -51,14 +53,17 @@ namespace E_Commerce_MVC
             builder.Services.AddScoped<IProductService, ProductService>();
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<ICartService, CartService>();
-            builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<BLL.Services.Order.IOrderService, OrderService>();
             builder.Services.AddScoped<IAddressService,AddressService >();
             builder.Services.AddScoped<ICartItemService, CartItemService>();
+            builder.Services.AddScoped<IAOrderService, AOrderService>();
+            builder.Services.AddScoped<IReviewService, ReviewService>();
 
             builder.Services.AddAutoMapper(typeof(ReviewProfile).Assembly);
             builder.Services.AddAutoMapper(typeof(ProductProfile).Assembly);
             builder.Services.AddAutoMapper(typeof(PaymentProfile).Assembly);
             builder.Services.AddAutoMapper(typeof(OrderProfile).Assembly);
+            builder.Services.AddAutoMapper(typeof(OrderHistoryProfile).Assembly);
             builder.Services.AddAutoMapper(typeof(ApplicationUserProfile).Assembly);
             builder.Services.AddAutoMapper(typeof(OrderItemProfile).Assembly);
             builder.Services.AddAutoMapper(typeof(CategoryProfile).Assembly);

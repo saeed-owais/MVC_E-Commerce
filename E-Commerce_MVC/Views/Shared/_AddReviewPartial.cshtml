@@ -1,0 +1,18 @@
+﻿@model BLL.DTOs.ReviewsDTOs.CreatePartailReviewViewModel
+
+
+<form asp-controller="Reviews" asp-action="AddReviewPartial" method="post">
+    <input type="hidden" asp-for="ProductId" />
+
+    <div class="mb-3">
+        <label asp-for="Rating" class="form-label">Rating</label>
+        <input asp-for="Rating" type="number" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Comment" class="form-label">Comment</label>
+        <textarea asp-for="Comment" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>

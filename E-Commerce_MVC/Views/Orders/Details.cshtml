@@ -1,0 +1,132 @@
+﻿@using BLL.DTOs.ReviewsDTOs
+
+
+@model BLL.DTOs.OrderDTOs.OrderDTO
+@* @using BLL.DTOs.ReviewsDTOs *@
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .card {
+            border-radius: 1rem;
+            border: none;
+        }
+
+        .card-body p {
+            font-size: 0.95rem;
+        }
+
+        .table th {
+            font-weight: 600;
+        }
+
+        .badge-status {
+            font-size: 0.85rem;
+            padding: 0.4em 0.7em;
+        }
+
+        .status-pending {
+            background-color: #ffc107;
+            color: #212529;
+        }
+
+        .status-shipped {
+            background-color: #17a2b8;
+        }
+
+        .status-delivered {
+            background-color: #28a745;
+        }
+
+        .status-cancelled {
+            background-color: #dc3545;
+        }
+
+        .btn-outline-primary {
+            border-radius: 20px;
+        }
+    </style>
+<body>
+
+    <div class="container mt-5 mb-5">
+
+        <div class="text-center mb-4">
+            <h2 class="fw-bold text-primary">Order Details</h2>
+        </div>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-md-6">
+                        <p class="mb-1"><strong>Order ID:</strong> @Model.Id</p>
+                        <p class="mb-1">
+                            <strong>Status:</strong>
+                            <span class="badge badge-status
+                                @(Model.Status == "Pending" ? "status-pending" :
+                                                                    Model.Status == "Shipped" ? "status-shipped" :
+                                                                    Model.Status == "Delivered" ? "status-delivered" :
+                                                                    "status-cancelled")">
+                                @Model.Status
+                            </span>
+                        </p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <p class="mb-1"><strong>Date:</strong> @Model.OrderDate.ToShortDateString()</p>
+                        <p class="mb-0">
+                            <strong>Total:</strong>
+                            <span class="text-success fw-bold">@Model.TotalAmount</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h4 class="card-title mb-3 text-secondary fw-semibold">Order Items</h4>
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Product</th>
+                            <th class="text-center">Quantity</th>
+                            <th class="text-center">Price</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.OrderItems)
+                        {
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td class="text-center">@item.Quantity</td>
+                                <td class="text-center text-success fw-semibold">@item.Price</td>
+                                <td class="text-center">
+                                    <a asp-action="Open"
+                                       asp-controller="Reviews"
+                                       asp-route-productId="@item.ProductId"
+                                       asp-route-orderId="@Model.Id"
+                                       class="btn btn-outline-primary btn-sm">
+                                        <i class="bi bi-pencil-square me-1"></i> Add Review
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="text-end mt-4">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left-circle me-1"></i> Back to Orders
+            </a>
+        </div>
+
+    </div>
+
+    @* @await Html.PartialAsync("_AddReviewPartial", new CreatePartailReviewViewModel { ProductId = "123" }) *@
+
+</body>

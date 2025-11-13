@@ -1,0 +1,76 @@
+﻿@using BLL.DTOs.ReviewsDTOs
+@model CreateReviewDto
+
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .card {
+            border-radius: 1rem;
+            border: none;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .form-label {
+            font-weight: 600;
+        }
+
+        .btn-success {
+            border-radius: 20px;
+            padding: 0.5rem 1.3rem;
+        }
+
+        textarea {
+            resize: none;
+        }
+    </style>
+<body>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <div class="text-center mb-3">
+                        <h3 class="fw-bold text-success">
+                            <i class="bi bi-star-fill me-2"></i>Add Review
+                        </h3>
+                        <p class="text-muted">Share your feedback about this product</p>
+                    </div>
+
+                    <form asp-controller="Reviews" asp-action="AddReview" method="post">
+                        <!-- Hidden fields -->
+                        <input type="hidden" asp-for="ProductId" />
+                        <input type="hidden" asp-for="OrderId" />
+
+                        <!-- Rating -->
+                        <div class="mb-3">
+                            <label asp-for="Rating" class="form-label">Rating (1–5)</label>
+                            <input asp-for="Rating" type="number" class="form-control" min="1" max="5" required />
+                            <span asp-validation-for="Rating" class="text-danger"></span>
+                        </div>
+
+                        <!-- Comment -->
+                        <div class="mb-3">
+                            <label asp-for="Comment" class="form-label">Comment</label>
+                            <textarea asp-for="Comment" class="form-control" rows="4" placeholder="Write your review..." required></textarea>
+                            <span asp-validation-for="Comment" class="text-danger"></span>
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-check-circle me-1"></i>Submit Review
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
