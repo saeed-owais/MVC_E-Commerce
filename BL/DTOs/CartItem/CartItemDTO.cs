@@ -8,7 +8,7 @@ namespace BLL.DTOs.CartItem
 {
     public class CartItemDTO
     {
-        public string Id { get; set; }
+        public string? Id { get; set; }
         public string ProductId { get; set; }
         public string ProductName { get; set; }
         public decimal Price { get; set; }

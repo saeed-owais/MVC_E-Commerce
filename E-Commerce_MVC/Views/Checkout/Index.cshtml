@@ -1,0 +1,170 @@
+﻿@model CheckoutViewModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<div class="container mt-4">
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-warning">@TempData["Error"]</div>
+    }
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+
+    <h2 class="mb-3">Checkout</h2>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <div class="card-header">Shipping Address</div>
+                <div class="card-body">
+    <!-- ✅ فورم الـ Checkout الرئيسي -->
+    <form asp-action="Process" method="post" id="checkoutForm">
+        <input type="hidden" asp-for="CreateOrderDto.UserId" />
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Shipping Address</label>
+
+            @if (Model.Addresses != null && Model.Addresses.Any())
+            {
+                <select asp-for="CreateOrderDto.AddressId" class="form-select mb-2" required>
+                    @foreach (var a in Model.Addresses)
+                    {
+                        <option value="@a.Id">
+                            @a.Street, @a.City (@a.PostalCode) - @a.Country
+                        </option>
+                    }
+                </select>
+
+                <div class="d-flex gap-2">
+                    <a asp-controller="Address" asp-action="AddAddress" class="btn btn-sm btn-success">
+                        <i class="bi bi-plus-circle me-1"></i> Add New
+                    </a>
+
+                    <a id="editAddressBtn" class="btn btn-sm btn-warning text-white">
+                        <i class="bi bi-pencil-square me-1"></i> Edit
+                    </a>
+
+                    <!-- ✅ زر حذف منفصل -->
+                    <button type="button" id="deleteAddressBtn" class="btn btn-sm btn-danger">
+                        <i class="bi bi-trash me-1"></i> Delete
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    You don't have any saved addresses yet.
+                    <a asp-controller="Address" asp-action="AddAddress" class="btn btn-sm btn-outline-primary ms-2">
+                        <i class="bi bi-plus-circle"></i> Add Address
+                    </a>
+                </div>
+            }
+
+            <span class="text-danger" asp-validation-for="CreateOrderDto.AddressId"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Payment Method</label>
+            <select asp-for="CreateOrderDto.PaymentMethod" class="form-select" required>
+                <option value="Stripe">Stripe (Card)</option>
+                <option value="Fawry">Fawry</option>
+            </select>
+            <span class="text-danger" asp-validation-for="CreateOrderDto.PaymentMethod"></span>
+        </div>
+
+        <button class="btn btn-success">Confirm & Pay</button>
+    </form>
+
+    <!-- ✅ فورم الحذف (منفصل بره) -->
+    <form id="deleteAddressForm" asp-controller="Address" asp-action="DeleteAddress" method="post" style="display:none;">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="id" id="selectedAddressId" />
+    </form>
+</div>
+
+            </div>
+
+            <div class="card">
+                <div class="card-header">Cart Items</div>
+                <div class="card-body">
+                    <table class="table align-middle">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th class="text-center">Qty</th>
+                                <th class="text-end">Unit Price</th>
+                                <th class="text-end">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.CartItems)
+                            {
+                                <tr>
+                                    <td>@item.ProductName</td>
+                                    <td class="text-center">@item.Quantity</td>
+                                    <td class="text-end">@item.Price.ToString("0.00")</td>
+                                    <td class="text-end">@item.Total.ToString("0.00")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">Order Summary</div>
+                <div class="card-body">
+                    <p class="d-flex justify-content-between">
+                        <span>Subtotal</span>
+                        <strong>@Model.Total.ToString("0.00")</strong>
+                    </p>
+                    <p class="text-muted small mb-3">Shipping calculated at payment.</p>
+                    <button class="btn btn-primary w-100" onclick="document.querySelector('form').submit()">Pay Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts 
+{
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const addressSelect = document.querySelector("[name='CreateOrderDto.AddressId']");
+            const deleteBtn = document.getElementById("deleteAddressBtn");
+            const deleteForm = document.getElementById("deleteAddressForm");
+            const hiddenInput = document.getElementById("selectedAddressId");
+            const editBtn = document.getElementById("editAddressBtn");
+
+            // ✅ Edit button
+            editBtn.addEventListener("click", function (e) {
+                e.preventDefault();
+                const selectedId = addressSelect?.value;
+                if (!selectedId) return alert("Please select an address to edit.");
+                window.location.href = `/Address/EditAddress/${selectedId}`;
+            });
+
+            // ✅ Delete button
+            deleteBtn.addEventListener("click", function () {
+                const selectedId = addressSelect?.value;
+                if (!selectedId) {
+                    alert("Please select an address to delete.");
+                    return;
+                }
+
+
+                hiddenInput.value = selectedId;
+                deleteForm.submit();
+            });
+        });
+    </script>
+}
+
