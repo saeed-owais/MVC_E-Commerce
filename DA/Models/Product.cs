@@ -1,4 +1,5 @@
 ﻿using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace DA.Models
@@ -12,6 +13,7 @@ namespace DA.Models
         public string? Description { get; set; }
 
         [Range(0, double.MaxValue)]
+        [Precision(18, 2)]
         public decimal Price { get; set; }
 
         public int Stock { get; set; }

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BLL.DTOs.Address;
+using DA.Models;
+
 
 namespace BLL.Mapper
 {
-    internal class AddressProfile
+    public class AddressProfile : AutoMapper.Profile
     {
+        public AddressProfile() {
+            CreateMap<Address, AddressDto>()
+                .ForMember(p=> p.UserId, opt => opt.MapFrom(a => a.UserId)).ReverseMap();
+        }
     }
 }
