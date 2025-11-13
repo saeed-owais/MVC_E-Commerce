@@ -11,6 +11,8 @@ namespace BLL.Mapper
         {
             CreateMap<Category, CategoryDto>();
             CreateMap<Category, CategoryDTO>();
+            CreateMap<CategoryCreateDto, Category>().ReverseMap();
+            CreateMap<Category, CategoryAdminDto>().ReverseMap();
         }
     }
 }

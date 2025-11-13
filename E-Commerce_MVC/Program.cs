@@ -6,7 +6,6 @@ using BLL.Services.AdminProduct;
 using BLL.Services.Cart;
 using BLL.Services.Cartitem;
 using BLL.Services.Category;
-using BLL.Services.Order;
 using BLL.Services.Order_Service;
 using BLL.Services.Product;
 using BLL.Services.Review_Service;
@@ -54,7 +53,7 @@ namespace E_Commerce_MVC
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<BLL.Services.Order.IOrderService, OrderService>();
-            builder.Services.AddScoped<IAddressService,AddressService >();
+            builder.Services.AddScoped<IAddressService, AddressService>();
             builder.Services.AddScoped<ICartItemService, CartItemService>();
             builder.Services.AddScoped<IAOrderService, AOrderService>();
             builder.Services.AddScoped<IReviewService, ReviewService>();
@@ -68,6 +67,7 @@ namespace E_Commerce_MVC
             builder.Services.AddAutoMapper(typeof(OrderItemProfile).Assembly);
             builder.Services.AddAutoMapper(typeof(CategoryProfile).Assembly);
             builder.Services.AddAutoMapper(typeof(CartItemProfile).Assembly);
+            builder.Services.AddAutoMapper(typeof(AdminCategoryService).Assembly);
 
             builder.Services.AddHttpClient();
 
