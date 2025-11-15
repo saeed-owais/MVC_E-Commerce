@@ -1,7 +1,10 @@
-﻿using BLL.DTOs.Order;
+﻿using API.Response;
+using API.ViewModel.Order;
+using BLL.DTOs.Order;
 using BLL.Services.Order;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq.Expressions;
 
 namespace API.Controllers
 {
@@ -18,21 +21,32 @@ namespace API.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateOrder(CreateOrderDto dto)
+        public async Task<ApiResponse<OrderViewModel>> CreateOrder(CreateOrderViewModel orderVM)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            var dto = new CreateOrderDto
+            {
+                UserId = orderVM.UserId,
+                AddressId = orderVM.AddressId,
+                PaymentMethod = orderVM.PaymentMethod
+            };
 
             var result = await _orderService.CreateOrderFromCartAsync(dto);
 
             if (!result.Success)
-                return BadRequest(new { message = result.Message });
+                return ResponseHelper.Fail<OrderViewModel>(result.Message);
 
-            return Ok(new
+            var vm = new OrderViewModel
             {
-                message = result.Message,
-                order = result.Order
-            });
+                Id = result.Order.Id,
+                UserId = result.Order.UserId,
+                OrderDate = result.Order.OrderDate,
+                Status = result.Order.Status,
+                TotalAmount = result.Order.TotalAmount,
+                Items = result.Order.Items,
+                PaymentMethod = result.Order.PaymentMethod,
+            };
+
+            return ResponseHelper.Success(vm, result.Message);
         }
     }
 }

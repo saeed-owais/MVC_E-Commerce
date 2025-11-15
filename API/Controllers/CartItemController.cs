@@ -21,7 +21,7 @@ namespace API.Controllers
         {
             var cartItems = await _cartItemService.GetAllAsync();
 
-           var  cartItemsviewModel = cartItems.Select(ci => new AllCartItemViewModel
+            var cartItemsviewModel = cartItems.Select(ci => new AllCartItemViewModel
             {
                 ProductId = ci.ProductId,
                 ProductName = ci.ProductName,

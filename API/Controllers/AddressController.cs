@@ -29,7 +29,7 @@ namespace API.Controllers
         {
             var addresses = await _addressService.GetAllAsync(userId);
 
-            var addressViewModels = addresses.Select( address=>
+            var addressViewModels = addresses.Select(address =>
                 new AllAddressViewModel
                 {
                     Id = address.Id,
@@ -44,11 +44,16 @@ namespace API.Controllers
             return ResponseHelper.Success(addressViewModels);
         }
 
+
         [HttpGet("{id}")]
         public async Task<ApiResponse<AddressViewModel>> GetById(string id)
         {
             var address = await _addressService.GetByIdAsync(id);
-            var addressViewModels = new AddressViewModel
+
+            if (address == null)
+                return ResponseHelper.Fail<AddressViewModel>("Address not found");
+
+            var vm = new AddressViewModel
             {
                 UserId = address.UserId,
                 Street = address.Street,
@@ -57,11 +62,9 @@ namespace API.Controllers
                 Country = address.Country
             };
 
-            if (addressViewModels == null)
-                return  ResponseHelper.Fail<AddressViewModel>("Address not found" );
-
-            return ResponseHelper.Success(addressViewModels);
+            return ResponseHelper.Success(vm);
         }
+
 
         [HttpPost]
         public async Task<ApiResponse<AddressViewModel>> Create(CreateAddressViewModel vm)
@@ -74,14 +77,23 @@ namespace API.Controllers
                 PostalCode = vm.PostalCode,
                 Country = vm.Country
             };
-            await _addressService.AddAsync(dto);
-            var getResult = await GetById(dto.Id);
 
-            return ResponseHelper.Success(getResult.Data);
+            await _addressService.AddAsync(dto);
+
+            var createdAddress = new AddressViewModel
+            {
+                UserId = vm.UserId,
+                Street = vm.Street,
+                City = vm.City,
+                PostalCode = vm.PostalCode,
+                Country = vm.Country
+            };
+
+            return ResponseHelper.Success(createdAddress, "Address created successfully");
         }
 
         [HttpPut("{id}")]
-        public async Task<bool> Update(string id, CreateAddressViewModel vm)
+        public async Task<ApiResponse<string>> Update(string id, CreateAddressViewModel vm)
         {
             var dto = new AddressDto
             {
@@ -94,14 +106,14 @@ namespace API.Controllers
             };
             await _addressService.UpdateAsync(dto);
 
-            return true;
+            return ResponseHelper.Success("Updated successfully");
         }
 
         [HttpDelete("{id}")]
-        public async Task<bool> Delete(string id)
+        public async Task<ApiResponse<string>> Delete(string id)
         {
             await _addressService.DeleteAsync(id);
-            return true;
+            return ResponseHelper.Success("Deleted successfully");
         }
     }
 }
