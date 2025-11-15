@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BLL.DTOs.CartItem;
 using DAL.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace BLL.Services.Cartitem
             _uow = uow;
             _mapper = mapper;
         }
-        public Task<List<CartItemDTO>> GetAllAsync()
+        public Task<List<CartItemDTO>> GetAllAsync(CancellationToken cancellationToken = default)
         {
             var cartItems =  _uow.CartItems.GetQueryable().Select(c => new CartItemDTO
             {
@@ -28,7 +29,24 @@ namespace BLL.Services.Cartitem
                 Quantity = c.Quantity,
                 Price = c.Product.Price
             });
-            return Task.FromResult(cartItems.ToList());
+            return cartItems.ToListAsync();
         }
+
+        public Task<List<CartItemDTO>> GetByUserAsync(string userId , CancellationToken cancellationToken = default)
+        {
+            var cartItems = _uow.CartItems
+                .GetQueryable()
+                .Where(c => c.UserId == userId)
+                .Select(c => new CartItemDTO
+                {
+                    ProductId = c.Product.Id,
+                    ProductName = c.Product.Name,
+                    Quantity = c.Quantity,
+                    Price = c.Product.Price
+                });
+
+            return cartItems.ToListAsync(cancellationToken);
+        }
+
     }
 }

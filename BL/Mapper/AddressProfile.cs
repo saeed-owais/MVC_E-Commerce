@@ -9,6 +9,9 @@ namespace BLL.Mapper
         public AddressProfile() {
             CreateMap<Address, AddressDto>()
                 .ForMember(p=> p.UserId, opt => opt.MapFrom(a => a.UserId)).ReverseMap();
+
+            //CreateMap<AddressDto, API.ViewModel.AddressViewModel>().ReverseMap();
+
         }
     }
 }
