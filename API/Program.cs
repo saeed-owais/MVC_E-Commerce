@@ -1,3 +1,4 @@
+using System.Text;
 using BLL.Mapper;
 using BLL.Services;
 using BLL.Services.Address;
@@ -20,107 +21,82 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
 
-namespace API
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
-    public class Program
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 6;
+})
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false;
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
     {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
-
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequiredLength = 6;
-            })
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-            builder.Services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-         .AddJwtBearer(options =>
-         {
-             options.SaveToken = true;
-             options.RequireHttpsMetadata = false;
-             options.TokenValidationParameters = new TokenValidationParameters
-             {
-                 ValidateIssuer = true,
-                 ValidateAudience = true,
-                 ValidIssuer = builder.Configuration["JWT:IssuerIP"],
-                 ValidAudience = builder.Configuration["JWT:AudienceIP"],
-                 IssuerSigningKey = new SymmetricSecurityKey(
-                     Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"]))
-             };
-         });
-            builder.Services.AddControllers();
-            // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            builder.Services.AddOpenApi();
-            builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            builder.Services.AddScoped<IAdminProductService, AdminProductService>();
-            builder.Services.AddScoped<IAdminCategoryService, AdminCategoryService>();
-            builder.Services.AddScoped<IProductService, ProductService>();
-            builder.Services.AddScoped<ICategoryService, CategoryService>();
-            builder.Services.AddScoped<ICartService, CartService>();
-            builder.Services.AddScoped<IOrderService, OrderService>();
-            builder.Services.AddScoped<IAddressService, AddressService>();
-            builder.Services.AddScoped<ICartItemService, CartItemService>();
-            builder.Services.AddScoped<IAOrderService, AOrderService>();
-            builder.Services.AddScoped<IReviewService, ReviewService>();
-
-            builder.Services.AddAutoMapper(typeof(ReviewProfile).Assembly);
-            builder.Services.AddAutoMapper(typeof(ProductProfile).Assembly);
-            builder.Services.AddAutoMapper(typeof(PaymentProfile).Assembly);
-            builder.Services.AddAutoMapper(typeof(OrderProfile).Assembly);
-            builder.Services.AddAutoMapper(typeof(OrderHistoryProfile).Assembly);
-            builder.Services.AddAutoMapper(typeof(ApplicationUserProfile).Assembly);
-            builder.Services.AddAutoMapper(typeof(OrderItemProfile).Assembly);
-            builder.Services.AddAutoMapper(typeof(CategoryProfile).Assembly);
-            builder.Services.AddAutoMapper(typeof(CartItemProfile).Assembly);
-            builder.Services.AddAutoMapper(typeof(AdminCategoryService).Assembly);
-            builder.Services.AddScoped<IAdminOrderService, AdminOrderService>();
-            builder.Services.AddScoped<IAdminUserService, AdminUserService>();
-            builder.Services.AddHttpClient();
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidIssuer = builder.Configuration["JWT:IssuerIP"],
+        ValidAudience = builder.Configuration["JWT:AudienceIP"],
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretKey"]))
+    };
+});
 
 
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            var app = builder.Build();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<IAddressService, AddressService>();
 
-            // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.MapOpenApi();
+builder.Services.AddScoped<IAdminProductService, AdminProductService>();
+builder.Services.AddScoped<IAdminCategoryService, AdminCategoryService>();
+builder.Services.AddScoped<IAdminOrderService, AdminOrderService>();
+builder.Services.AddScoped<IAdminUserService, AdminUserService>();
+builder.Services.AddScoped<ICartItemService, CartItemService>();
 
-                app.UseSwaggerUI(options =>
-                {
-                    options.SwaggerEndpoint("/openapi/v1.json", "QuizSystem API v1");
+builder.Services.AddHttpClient();
 
-                    options.RoutePrefix = string.Empty;
-                });
-            }
+builder.Services.AddAutoMapper(typeof(ProductProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(CategoryProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(ReviewProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(OrderProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(OrderHistoryProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(ApplicationUserProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(CartItemProfile).Assembly);
+builder.Services.AddAutoMapper(typeof(OrderItemProfile).Assembly);
 
-            app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+builder.Services.AddControllers();
+
+var app = builder.Build();
 
 
-            app.MapControllers();
+app.UseHttpsRedirection();
 
-            app.Run();
-        }
-    }
-}
+app.UseAuthentication();   
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();

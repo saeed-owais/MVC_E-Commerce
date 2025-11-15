@@ -1,6 +1,5 @@
 ﻿using API.Response;
 using BLL.DTOs.Account;
-using BLL.DTOs.Account.ECommerceAPI.DTOs;
 using DA.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
