@@ -16,21 +16,6 @@ namespace API.Controllers
             _cartItemService = cartItemService;
         }
 
-        [HttpGet]
-        public async Task<ApiResponse<List<AllCartItemViewModel>>> GetAll()
-        {
-            var cartItems = await _cartItemService.GetAllAsync();
-
-            var cartItemsviewModel = cartItems.Select(ci => new AllCartItemViewModel
-            {
-                ProductId = ci.ProductId,
-                ProductName = ci.ProductName,
-                Price = ci.Price,
-                Quantity = ci.Quantity
-            }).ToList();
-            return ResponseHelper.Success(cartItemsviewModel);
-        }
-
 
         [HttpGet("user/{userId}")]
         public async Task<ApiResponse<List<AllCartItemViewModel>>> GetByUser(string userId)
